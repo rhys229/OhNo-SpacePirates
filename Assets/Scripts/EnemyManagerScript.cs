@@ -17,6 +17,7 @@ public class EnemyManagerScript : MonoBehaviour {
     // Start is called before the first frame update
     void Start()
     {
+        Instantiate(brick, new Vector2(0, -2.6f), Quaternion.identity);
         for (int i = 0; i < numRows; i++) {
             for (int j = 0; j < numColumns; j++) {
                 Transform go = Instantiate(brick);
@@ -35,10 +36,8 @@ public class EnemyManagerScript : MonoBehaviour {
 
     void Update()
     {
-        //move side to side
-        float offsetx = Mathf.Sin(Time.time * speed) * amplitude / 2;
-        float offsety = -.1f*(Time.time * yspeed);
-        transform.position = new Vector2(offsetx, y: offsety);
+       
+        
     }
 
 }

@@ -333,10 +333,10 @@ MonoBehaviour:
   - {r: 1, g: 0.68315876, b: 0, a: 1}
   - {r: 0.96933126, g: 1, b: 0, a: 1}
   - {r: 0, g: 0.42030418, b: 0.9528302, a: 1}
-  xSpacing: 1.25
-  ySpacing: 0.5
-  xOrigin: -5.5
-  yOrigin: 4
+  xSpacing: 1
+  ySpacing: 1
+  xOrigin: -3
+  yOrigin: 0
   numRows: 6
   numColumns: 4
   speed: 2
@@ -575,11 +575,16 @@ MonoBehaviour:
   leftWall: -6.2
   rightWall: 6.2
   middleShipID: 1
-  projectile: {fileID: 5392221425186979263, guid: 37dfdbbcfa7f6fa4b9b99b3590720b05,
+  leftAbductor: {fileID: 8630373017177188824, guid: fed6364c006059b4fb26d1597a949f0e,
     type: 3}
-  leftShipFire: 122
-  rightShipFire: 99
-  middleShipFire: 120
+  midAbductor: {fileID: 8630373017177188824, guid: 37b76fab5fc2dcf4cb34fd655d3f13b3,
+    type: 3}
+  rightAbductor: {fileID: 8630373017177188824, guid: 7b5a10261eb26d24cb8cad2a1fffea66,
+    type: 3}
+  leftAbduct: 113
+  rightAbduct: 101
+  midAbduct: 119
+  lockMovement: 0
 --- !u!212 &1474535115
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -640,7 +645,7 @@ Transform:
   m_GameObject: {fileID: 1474535113}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -4, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
+  m_LocalScale: {x: 1.7, y: 1.7, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1

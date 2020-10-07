@@ -31,11 +31,6 @@ public class ProjectileScript : MonoBehaviour
             return;
         }
 
-        if (other.gameObject.tag == "Player")
-        {
-            Debug.Log("We hit the player");
-        }
-
         if (other.gameObject.tag == "wall")
         {
             Destroy(this.gameObject);

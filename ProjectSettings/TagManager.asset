@@ -10,6 +10,10 @@ TagManager:
   - Enemy
   - Projectile
   - Enemy Projectile
+  - leftAbductor
+  - Ally
+  - rightAbductor
+  - midAbductor
   layers:
   - Default
   - TransparentFX
