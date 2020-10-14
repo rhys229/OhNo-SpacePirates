@@ -155,7 +155,7 @@ public class BomberScript : MonoBehaviour
             animator.SetTrigger("Shoot");
             yield return new WaitForSeconds(.2f);
             Instantiate(Projectile, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(4f);
             shooting = false;
         }
     }

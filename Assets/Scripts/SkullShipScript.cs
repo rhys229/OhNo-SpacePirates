@@ -136,7 +136,7 @@ public class SkullShipScript : MonoBehaviour
     private void Fire()
     {
         int i = Random.Range(0, 100);
-        if (i > 80 && playerControlled == false)
+        if (i > 20 && playerControlled == false)
         {
             StartCoroutine("EnemyShoot");
         }
@@ -153,7 +153,7 @@ public class SkullShipScript : MonoBehaviour
         {
             shooting = true;
             Instantiate(Projectile, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
-            yield return new WaitForSeconds(.2f);
+            yield return new WaitForSeconds(.4f);
             shooting = false;
         }
     }

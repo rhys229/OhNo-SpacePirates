@@ -135,7 +135,7 @@ public class PirateSpearScript : MonoBehaviour
     private void Fire()
     {
         int i = Random.Range(0, 100);
-        if (i > 80 && playerControlled == false)
+        if (i > 40 && playerControlled == false)
         {
             StartCoroutine("EnemyShoot");
         }
@@ -152,7 +152,7 @@ public class PirateSpearScript : MonoBehaviour
         {
             shooting = true;
             Instantiate(Projectile, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
-            yield return new WaitForSeconds(.2f);
+            yield return new WaitForSeconds(1f);
             shooting = false;
         }
     }
