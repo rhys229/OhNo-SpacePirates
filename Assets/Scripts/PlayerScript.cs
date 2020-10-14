@@ -6,7 +6,8 @@ using UnityEngine.SceneManagement;
 public class PlayerScript : MonoBehaviour {
     private float     xPos;
     private float yPos;
-    public float      speed = .05f;
+    public float      speed = .04f;
+    public float yspeed = .03f;
     public float      leftWall, rightWall, topwall, bottomwall;
     public int middleShipID = 1;
     public GameObject leftAbductor;
@@ -67,14 +68,14 @@ public class PlayerScript : MonoBehaviour {
             {
                 if (yPos < topwall)
                 {
-                    yPos += speed;
+                    yPos += yspeed;
                 }
             }
             if (Input.GetKey(KeyCode.DownArrow))
             {
                 if (yPos > bottomwall)
                 {
-                    yPos -= speed;
+                    yPos -= yspeed;
                 }
             }
         }

@@ -613,6 +613,8 @@ MonoBehaviour:
   PirateText: {fileID: 347457337}
   MainMusic: {fileID: 519625897}
   PirateMusic: {fileID: 519625896}
+  scoreManager: {fileID: 0}
+  scoreManagerScript: {fileID: 0}
 --- !u!4 &519625895
 Transform:
   m_ObjectHideFlags: 0
@@ -1514,6 +1516,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   manager: {fileID: 0}
   ManagerScript: {fileID: 0}
+  active: 0
   score: 0
 --- !u!4 &1119927330
 Transform:
