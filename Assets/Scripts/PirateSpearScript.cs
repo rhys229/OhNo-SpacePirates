@@ -85,7 +85,7 @@ public class PirateSpearScript : MonoBehaviour
         {
             playerControlled = true;
             transform.gameObject.tag = "Ally";
-            transform.position = new Vector2(playerObject.transform.position.x-.7f, playerObject.transform.position.y+.4f);
+            transform.position = new Vector2(playerObject.transform.position.x-.65f, playerObject.transform.position.y+.35f);
             transform.Rotate(180,0,0);
             transform.parent = playerObject.transform;
             slot = 1;
@@ -109,7 +109,7 @@ public class PirateSpearScript : MonoBehaviour
         {
             playerControlled = true;
             transform.gameObject.tag = "Ally";
-            transform.position = new Vector2(playerObject.transform.position.x+.7f, playerObject.transform.position.y+.4f);
+            transform.position = new Vector2(playerObject.transform.position.x+.65f, playerObject.transform.position.y+.35f);
             transform.Rotate(180,0,0);
             transform.parent = playerObject.transform;
             slot = 3;

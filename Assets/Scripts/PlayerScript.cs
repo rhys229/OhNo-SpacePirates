@@ -35,8 +35,8 @@ public class PlayerScript : MonoBehaviour {
         leftSlotFull = true;
         midSlotFull = false;
         rightSlotFull = true;
-        Instantiate(leftStarterShip, new Vector2(transform.position.x - .7f, transform.position.y+.4f), Quaternion.identity);
-        Instantiate(rightStarterShip, new Vector2(transform.position.x + .7f, transform.position.y+.4f), Quaternion.identity);
+        Instantiate(leftStarterShip, new Vector2(transform.position.x - .65f, transform.position.y+.35f), Quaternion.identity);
+        Instantiate(rightStarterShip, new Vector2(transform.position.x + .65f, transform.position.y+.35f), Quaternion.identity);
         lockMovement = false;
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
     }
