@@ -35,6 +35,9 @@ public class EnemyManagerScript : MonoBehaviour
     public AudioSource MainMusic;
     public AudioSource PirateMusic;
     
+    public GameObject scoreManager;
+    public ScoreManagerScript scoreManagerScript;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -43,6 +46,9 @@ public class EnemyManagerScript : MonoBehaviour
         Level.gameObject.SetActive(false);
         LevelText.gameObject.SetActive(false);
         PirateText.gameObject.SetActive(false);
+        
+        scoreManager = GameObject.Find("ScoreManager");
+        scoreManagerScript = scoreManager.GetComponent<ScoreManagerScript>();
     }
 
     
@@ -231,7 +237,12 @@ public class EnemyManagerScript : MonoBehaviour
         }
         return new int[,]{{3,4,5,5,5,5,4,3},{4,4,4,3,3,4,4,4},{3,3,2,2,2,2,3,3}};
     }
-        
+
+    private void OnDestroy()
+    {
+        Debug.Log("killing score script");
+        scoreManagerScript.kill();
+    }
 }
     
 

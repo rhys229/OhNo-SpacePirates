@@ -7,6 +7,7 @@ public class ScoreManagerScript : MonoBehaviour
 {
     public GameObject manager;
     public EnemyManagerScript ManagerScript;
+    public bool active;
 
     public int score;
     // Start is called before the first frame update
@@ -14,16 +15,25 @@ public class ScoreManagerScript : MonoBehaviour
     {
         manager = GameObject.Find("EnemyManager");
         ManagerScript = manager.GetComponent<EnemyManagerScript>();
+        active = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        score = ManagerScript.score;
+        if (active == true)
+        {
+            score = ManagerScript.score;
+        }
     }
 
     private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
+    }
+
+    public void kill()
+    {
+        active = false;
     }
 }
