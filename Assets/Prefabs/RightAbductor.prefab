@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8467621810115401953}
   - component: {fileID: 8640790034957054999}
   - component: {fileID: 7506814428168727350}
+  - component: {fileID: 1045494031486491444}
   m_Layer: 0
   m_Name: RightAbductor
   m_TagString: rightAbductor
@@ -72,7 +73,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -5351931959168587997, guid: 0aecc0589f216914298b224e202a815e,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -132,3 +133,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!95 &1045494031486491444
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8630373017177188824}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f0f5686040e0eda44969ca5e4c31d69d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

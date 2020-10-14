@@ -11,4 +11,22 @@ The basic rules have a strong basis in galaga. There will be procedurely generat
 Randomly, there will be a "Space Pirates" round. Space pirates are faster and have better weapons, but there are fewer of them. They are also worth more points. This replaces the challenge round of traditional Galaga.
 
 # 10/7/2020 First Test
-I have spent so much time developing sprites for this game, that for my play test today, I only have a "tech demo" of sorts that shows off my primary abduction mechanic. In the coming days, I will be adding my new enemies and polishing into something that someone might call a game
+I have spent so much time developing sprites for this game, that for my play test today, I only have a "tech demo" of sorts that shows off my primary abduction mechanic. In the coming days, I will be adding my new enemies and polishing into something that someone might call a game.
+
+My playtester and I discussed how the aesthetic of my game felt, whether the abduction mechanic felt rewarding, possible ways to keep score, and her overall first impressions
+
+Overall I learned to decrease the speed of my ship, decrease the speed of enemy ships, decrease the abduction lock-out timer, amd create more pirate-themed ships.
+
+I also slightly redid my single and doulbe shooter sprites, because me and my playtester agreed that they didn't quite fit.
+
+# 10/13/2020 The Day of Reckoning
+I have spent the last few days doing basically nothing but programmning this game. Because of the content I added last minute, I haven't gotten the chance to have a bunch of playtests on the new content, but I plan on working on this game past the due date.
+
+I spent a long time redoing the enenmy spawning script and to be honest it kind of kicks ass now so be sure to look at that.
+
+Wishlist for future development:
+Audio on all weapon fires
+At least two new ships
+More levels if people ever get to them
+Slight redo of some of my more basic ships
+High score entry

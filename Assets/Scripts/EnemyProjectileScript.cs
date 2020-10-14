@@ -46,6 +46,10 @@ public class EnemyProjectileScript : MonoBehaviour
             Destroy(other.gameObject);
             Destroy(this.gameObject);
         }
+        if (other.gameObject.tag == "floor")
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -59,6 +63,10 @@ public class EnemyProjectileScript : MonoBehaviour
         }
 
         if (other.gameObject.tag == "wall")
+        {
+            Destroy(this.gameObject);
+        }
+        if (other.gameObject.tag == "floor")
         {
             Destroy(this.gameObject);
         }
