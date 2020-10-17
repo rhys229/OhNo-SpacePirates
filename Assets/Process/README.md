@@ -30,3 +30,18 @@ At least two new ships
 More levels if people ever get to them
 Slight redo of some of my more basic ships
 High score entry
+
+#Version History
+
+## V0.1 Initial Alpha Test Build
+
+## V0.2
+Give player one life after their ships are gone
+Get rid of starterships, introduce easier first wave
+Rebalance SkullShips
+Rework single shooter sprite, add animation 
+Add a ship between twin shooter and bomber
+Add explosion animation and object
+Revamp scoring system
+Fix overlapping level bug
+Rework Levels and add more

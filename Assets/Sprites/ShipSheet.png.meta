@@ -11,6 +11,18 @@ TextureImporter:
   - first:
       213: -4460919757325500910
     second: ShipSheet_2
+  - first:
+      213: 5125113874893683678
+    second: ShipSheet_0
+  - first:
+      213: 5083860517203873047
+    second: ShipSheet_1
+  - first:
+      213: 7407949795414728440
+    second: ShipSheet_2
+  - first:
+      213: -7545453999009539341
+    second: ShipSheet_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -126,7 +138,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 1
+        y: 0
         width: 120
         height: 80
       alignment: 0
@@ -136,8 +148,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 18d4fb1bbcbb5bce0800000000000000
-      internalID: -1389998426439070335
+      spriteID: edbb67a4aef002740800000000000000
+      internalID: 5125113874893683678
       vertices: []
       indices: 
       edges: []
@@ -147,7 +159,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 120
-        y: 1
+        y: 0
         width: 120
         height: 80
       alignment: 0
@@ -157,8 +169,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a852bc36d6b2ba1a0800000000000000
-      internalID: -6797291463759944310
+      spriteID: 71d029774308d8640800000000000000
+      internalID: 5083860517203873047
       vertices: []
       indices: 
       edges: []
@@ -168,7 +180,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 240
-        y: 1
+        y: 0
         width: 120
         height: 80
       alignment: 0
@@ -178,8 +190,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 21e771d9d11a712c0800000000000000
-      internalID: -4460919757325500910
+      spriteID: 8fe5f9507135ec660800000000000000
+      internalID: 7407949795414728440
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShipSheet_3
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 0
+        width: 120
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3fa5cffb099294790800000000000000
+      internalID: -7545453999009539341
       vertices: []
       indices: 
       edges: []

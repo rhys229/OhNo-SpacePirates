@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -6,8 +7,8 @@ using UnityEngine.SceneManagement;
 public class PlayerScript : MonoBehaviour {
     private float     xPos;
     private float yPos;
-    public float      speed = .04f;
-    public float yspeed = .03f;
+    public float      speed = 10f;
+    public float yspeed = 10f;
     public float      leftWall, rightWall, topwall, bottomwall;
     public int middleShipID = 1;
     public GameObject leftAbductor;
@@ -25,20 +26,21 @@ public class PlayerScript : MonoBehaviour {
 
     public SpriteRenderer spriteRenderer;
     public Sprite[] spriteArray;
-
-    public GameObject leftStarterShip;
-    public GameObject rightStarterShip;
+    
 
     public bool godMode;
+
+    public bool vulnerable;
+
+    public bool abducting;
     // Start is called before the first frame update
     void Start()
     {
-        leftSlotFull = true;
+        leftSlotFull = false;
         midSlotFull = false;
-        rightSlotFull = true;
-        Instantiate(leftStarterShip, new Vector2(transform.position.x - .65f, transform.position.y+.35f), Quaternion.identity);
-        Instantiate(rightStarterShip, new Vector2(transform.position.x + .65f, transform.position.y+.35f), Quaternion.identity);
+        rightSlotFull = false;
         lockMovement = false;
+        abducting = false;
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
     }
     
@@ -53,7 +55,7 @@ public class PlayerScript : MonoBehaviour {
             {
                 if (xPos > leftWall)
                 {
-                    xPos -= speed;
+                    xPos -= speed * Time.deltaTime;
                 }
             }
 
@@ -61,44 +63,56 @@ public class PlayerScript : MonoBehaviour {
             {
                 if (xPos < rightWall)
                 {
-                    xPos += speed;
+                    xPos += speed*Time.deltaTime;
                 }
             }
             if (Input.GetKey(KeyCode.UpArrow))
             {
                 if (yPos < topwall)
                 {
-                    yPos += yspeed;
+                    yPos += yspeed*Time.deltaTime;
                 }
             }
             if (Input.GetKey(KeyCode.DownArrow))
             {
                 if (yPos > bottomwall)
                 {
-                    yPos -= yspeed;
+                    yPos -= yspeed*Time.deltaTime;
                 }
             }
+
+            Vector3 moveVector = new Vector3(xPos, yPos, 0);
+            transform.localPosition = moveVector;
         }
 
         if (Input.GetKeyDown(leftAbduct))
         {
             if (leftSlotFull == false)
             {
-                StartCoroutine("leftAbduction");
+                if (!abducting)
+                {
+                    StartCoroutine("leftAbduction");
+                }
             }
         }
         if (Input.GetKeyDown(midAbduct))
         {
             if (midSlotFull == false)
             {
-                StartCoroutine("midAbduction");
+                if (!abducting)
+                {
+                    StartCoroutine("midAbduction");
+                }
             }
         }
         if (Input.GetKeyDown(rightAbduct))
         {
             if (rightSlotFull == false)
             {
-                StartCoroutine("rightAbduction");
+                if (!abducting)
+                {
+                    StartCoroutine("rightAbduction");
+                }
             }
         }
 
@@ -124,31 +138,37 @@ public class PlayerScript : MonoBehaviour {
             }
         }
 
-            transform.localPosition = new Vector3(xPos, yPos, 0);
+            
     }
     IEnumerator leftAbduction()
     {
+        abducting = true;
         GameObject leftAbductorInstantiated = Instantiate(leftAbductor, new Vector2(transform.position.x-.7f, transform.position.y+ .7f), Quaternion.identity);
         lockMovement = true;
         yield return new WaitForSeconds(1.5f);
         lockMovement = false;
         Destroy(leftAbductorInstantiated);
+        abducting = false;
     }
     IEnumerator midAbduction()
     {
+        abducting = true;
         GameObject midAbductorInstantiated = Instantiate(midAbductor, new Vector2(transform.position.x, transform.position.y+ 0.7f), Quaternion.identity);
         lockMovement = true;
         yield return new WaitForSeconds(1.5f);
         lockMovement = false;
         Destroy(midAbductorInstantiated);
+        abducting = false;
     }
     IEnumerator rightAbduction()
     {
+        abducting = true;
         GameObject rightAbductorInstantiated = Instantiate(rightAbductor, new Vector2(transform.position.x+.7f, transform.position.y+ 0.7f), Quaternion.identity);
         lockMovement = true;
         yield return new WaitForSeconds(1.5f);
         lockMovement = false;
         Destroy(rightAbductorInstantiated);
+        abducting = false;
     }
 
     public void loadShip(int slot)
@@ -182,41 +202,85 @@ public class PlayerScript : MonoBehaviour {
             rightSlotFull = false;
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Enemy Projectile")
+        {
+            if (vulnerable)
+            {
+                StartCoroutine("gameover");
+            }
+        }
+        
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "Enemy")
+        {
+            if (vulnerable)
+            {
+                StartCoroutine("gameover");
+            }
+        }
+    }
+
     public void updateShip() 
     {
         if ((leftSlotFull == true) && (midSlotFull == true) && (rightSlotFull == true))
         {
-            spriteRenderer.sprite = spriteArray[2];
+            spriteRenderer.sprite = spriteArray[3];
+            vulnerable = false;
         }  
         if ((leftSlotFull == true) && (midSlotFull == false) && (rightSlotFull == true))
         {
-            spriteRenderer.sprite = spriteArray[1];
+            spriteRenderer.sprite = spriteArray[2];
+            vulnerable = false;
         }  
         if ((leftSlotFull == false) && (midSlotFull == true) && (rightSlotFull == true))
         {
-            spriteRenderer.sprite = spriteArray[1];
+            spriteRenderer.sprite = spriteArray[2];
+            vulnerable = false;
         }  
         if ((leftSlotFull == true) && (midSlotFull == true) && (rightSlotFull == false))
         {
-            spriteRenderer.sprite = spriteArray[1];
+            spriteRenderer.sprite = spriteArray[2];
+            vulnerable = false;
         }  
         if ((leftSlotFull == true) && (midSlotFull == false) && (rightSlotFull == false))
         {
-            spriteRenderer.sprite = spriteArray[0];
+            spriteRenderer.sprite = spriteArray[1];
+            vulnerable = false;
         } 
         if ((leftSlotFull == false) && (midSlotFull == true) && (rightSlotFull == false))
         {
-            spriteRenderer.sprite = spriteArray[0];
+            spriteRenderer.sprite = spriteArray[1];
+            vulnerable = false;
         } 
         if ((leftSlotFull == false) && (midSlotFull == false) && (rightSlotFull == true))
         {
-            spriteRenderer.sprite = spriteArray[0];
+            spriteRenderer.sprite = spriteArray[1];
+            vulnerable = false;
         }
 
         if ((leftSlotFull == false) && (midSlotFull == false) && (rightSlotFull == false) && (godMode == false))
         {
-            SceneManager.LoadScene("GameOver");
+            spriteRenderer.sprite = spriteArray[0];
+            vulnerable = true;
         }
+    }
+
+    IEnumerator gameover()
+    {
+        GameObject[] enemyObjects;
+        enemyObjects = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (GameObject enemy in enemyObjects)
+        {
+            GameObject.Destroy(enemy);
+        }
+        yield return new WaitForSeconds(.1f);
+        SceneManager.LoadScene("GameOver");
     }
     
 }

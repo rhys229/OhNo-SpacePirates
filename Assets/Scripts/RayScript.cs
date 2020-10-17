@@ -28,7 +28,6 @@ public class RayScript : MonoBehaviour
     {
         if (other.gameObject.tag == "Enemy")
         {
-            ManagerScript.score += 10;
             ManagerScript.tally++;
             Destroy(other.gameObject);
         }

@@ -33,7 +33,7 @@ public class StarterShipScript : MonoBehaviour
         playerScript = playerObject.GetComponent<PlayerScript>();
         playerControlled = true;
         transform.parent = playerObject.transform;
-        transform.gameObject.tag = "Ally";
+        gameObject.tag = "Ally";
 
     }
 

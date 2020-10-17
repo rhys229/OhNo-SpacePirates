@@ -1,16 +1,19 @@
 fileFormatVersion: 2
-guid: 65c6da799c6944a46a0948059d74b6e6
+guid: a1f3977090a36864f8056e90e0aa3681
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4465754284652991754
-    second: SingleShooter_0
+      213: -5064571047234219621
+    second: BurstShooter_0
   - first:
-      213: 3086780417806253455
-    second: SingleShooter_1
+      213: 6755663916607694842
+    second: BurstShooter_1
   - first:
-      213: 5239123217334964835
-    second: SingleShooter_2
+      213: 3805364390509733301
+    second: BurstShooter_2
+  - first:
+      213: -3799578395083519350
+    second: BurstShooter_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -122,7 +125,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: SingleShooter_0
+      name: BurstShooter_0
       rect:
         serializedVersion: 2
         x: 0
@@ -136,14 +139,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a059bee7cdb89fd30800000000000000
-      internalID: 4465754284652991754
+      spriteID: b9150ed377707b9b0800000000000000
+      internalID: -5064571047234219621
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SingleShooter_1
+      name: BurstShooter_1
       rect:
         serializedVersion: 2
         x: 32
@@ -157,14 +160,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f8d39fe7f6276da20800000000000000
-      internalID: 3086780417806253455
+      spriteID: af763530a80f0cd50800000000000000
+      internalID: 6755663916607694842
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SingleShooter_2
+      name: BurstShooter_2
       rect:
         serializedVersion: 2
         x: 64
@@ -178,8 +181,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 36290cfdeca15b840800000000000000
-      internalID: 5239123217334964835
+      spriteID: 5b5e04160ce5fc430800000000000000
+      internalID: 3805364390509733301
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BurstShooter_3
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a8a4cc8a49f254bc0800000000000000
+      internalID: -3799578395083519350
       vertices: []
       indices: 
       edges: []

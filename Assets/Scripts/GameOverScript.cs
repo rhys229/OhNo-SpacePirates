@@ -29,7 +29,7 @@ public class GameOverScript : MonoBehaviour
         yield return new WaitForSeconds(.1f);
         ScoreManager = GameObject.Find("ScoreManager");
         ScoreManagerScript = ScoreManager.GetComponent<ScoreManagerScript>();
-        int score = ScoreManagerScript.score;
-        FinalScore.text = score.ToString();
+        int finalscore = ScoreManagerScript.score;
+        FinalScore.text = finalscore.ToString();
     }
 }

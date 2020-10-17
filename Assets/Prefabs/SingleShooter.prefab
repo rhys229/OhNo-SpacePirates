@@ -75,12 +75,13 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 65c6da799c6944a46a0948059d74b6e6, type: 3}
+  m_Sprite: {fileID: 4465754284652991754, guid: 65c6da799c6944a46a0948059d74b6e6,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 0.25}
+  m_Size: {x: 0.32, y: 0.32}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -104,7 +105,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 0.32, y: 0.32}
-    newSize: {x: 1, y: 0.25}
+    newSize: {x: 0.32, y: 0.32}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -171,9 +172,20 @@ MonoBehaviour:
   playerControlled: 0
   playerObject: {fileID: 0}
   speed: 0.4
-  yspeed: 0.0006
+  yspeed: 0.08
   amplitude: 0.012
   manager: {fileID: 0}
   ManagerScript: {fileID: 0}
   playerScript: {fileID: 0}
   shooting: 0
+  direction: 0
+  minDistance: -1
+  maxDistance: 1
+  offsetx: 0
+  explosion: {fileID: 9169247116604754688, guid: 26acfadb29740c343851c18c82f4756a,
+    type: 3}
+  spriteRenderer: {fileID: 0}
+  spriteArray:
+  - {fileID: 4465754284652991754, guid: 65c6da799c6944a46a0948059d74b6e6, type: 3}
+  - {fileID: 3086780417806253455, guid: 65c6da799c6944a46a0948059d74b6e6, type: 3}
+  - {fileID: 5239123217334964835, guid: 65c6da799c6944a46a0948059d74b6e6, type: 3}

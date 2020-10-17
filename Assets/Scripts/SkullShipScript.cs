@@ -24,6 +24,13 @@ public class SkullShipScript : MonoBehaviour
     public bool shooting = false;
     
     public PlayerScript playerScript;
+    
+    public int direction;
+    public float minDistance = -1;
+    public float maxDistance = 1;
+    public float offsetx = 0;
+    
+    public GameObject explosion;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +42,9 @@ public class SkullShipScript : MonoBehaviour
         float delay = Random.Range(2f, 10f);
         float rate = Random.Range(2f, 8f);
         InvokeRepeating("Fire", delay, rate);
+        direction = -1;
+        minDistance = transform.position.x+minDistance;
+        maxDistance = transform.position.x+maxDistance-.5f;
     }
 
     // Update is called once per frame
@@ -72,8 +82,32 @@ public class SkullShipScript : MonoBehaviour
         }
         else if (playerControlled == false)
         {
-            float offsetx = Mathf.Sin(Time.time * speed) * amplitude / 20;
-            float offsety = -.2f*(yspeed);
+            
+            switch (direction)
+            {
+                case -1:
+                    if (transform.position.x > minDistance)
+                    {
+                        offsetx = (-1*(speed))*Time.deltaTime;
+                    }
+                    else
+                    {
+                        direction = 1;
+                    }
+                    break;
+                case 1:
+                    if (transform.position.x < maxDistance)
+                    {
+                        offsetx = (1*(speed))*Time.deltaTime;
+                    }
+                    else
+                    {
+                        direction = -1;
+                    }
+                    break;
+            }
+
+            float offsety = (-1*(yspeed))*Time.deltaTime;
             Vector3 move = new Vector3(offsetx, y: offsety,0);
             transform.position = transform.position+move;
         }
@@ -131,6 +165,13 @@ public class SkullShipScript : MonoBehaviour
             ManagerScript.tally++;
         }
     }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Projectile" && this.gameObject.tag == "Enemy")
+        {
+            ManagerScript.score += 50;
+        }
+    }
     
 
     private void Fire()
@@ -153,7 +194,7 @@ public class SkullShipScript : MonoBehaviour
         {
             shooting = true;
             Instantiate(Projectile, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
-            yield return new WaitForSeconds(.4f);
+            yield return new WaitForSeconds(.6f);
             shooting = false;
         }
     }
@@ -166,6 +207,7 @@ public class SkullShipScript : MonoBehaviour
 
     public void OnDestroy()
     {
+        Instantiate(explosion, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
         if (playerControlled)
         {
             playerScript.unloadShip(slot);

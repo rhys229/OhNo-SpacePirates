@@ -11,11 +11,11 @@ GameObject:
   - component: {fileID: 5392221425186979261}
   - component: {fileID: 5392221425186979262}
   - component: {fileID: 5392221425186979259}
-  - component: {fileID: -6856912944216007672}
-  - component: {fileID: 6341728573328289172}
+  - component: {fileID: 5392221425186979260}
+  - component: {fileID: 692406172727734142}
   m_Layer: 8
-  m_Name: EnemySpearProjectile
-  m_TagString: Enemy Projectile
+  m_Name: BurstProjectile
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 5392221425186979263}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -2, z: 0}
-  m_LocalScale: {x: 2.25, y: 2.25, z: 1}
+  m_LocalScale: {x: 1.75, y: 1.75, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 496ab68f6dab95444a2f7f3f2b41b159, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1f233089f7e97d947a6a49e5e4997c07, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -106,7 +106,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &-6856912944216007672
+--- !u!114 &5392221425186979260
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -115,12 +115,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 5392221425186979263}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32c9348a7747be84da51d80f10e03cc0, type: 3}
+  m_Script: {fileID: 11500000, guid: 880b6da7c13f448cfaec063f909f4e18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 4.5
-  direction: -1
---- !u!61 &6341728573328289172
+  speed: 2
+  direction: 1
+  manager: {fileID: 0}
+  ManagerScript: {fileID: 0}
+--- !u!61 &692406172727734142
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -144,5 +146,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.32, y: 0.16}
+  m_Size: {x: 0.06, y: 0.1}
   m_EdgeRadius: 0

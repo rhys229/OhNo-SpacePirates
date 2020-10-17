@@ -1,16 +1,40 @@
 fileFormatVersion: 2
-guid: 65c6da799c6944a46a0948059d74b6e6
+guid: f566241c217976e45b09d479a94c2730
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4465754284652991754
-    second: SingleShooter_0
+      213: 5986030973748356752
+    second: Explosion_0
   - first:
-      213: 3086780417806253455
-    second: SingleShooter_1
+      213: -5600206312213581617
+    second: Explosion_1
   - first:
-      213: 5239123217334964835
-    second: SingleShooter_2
+      213: 3815954189206336483
+    second: Explosion_2
+  - first:
+      213: -3690502768834906923
+    second: Explosion_3
+  - first:
+      213: -49130668184793455
+    second: Explosion_4
+  - first:
+      213: -2330519403281856691
+    second: Explosion_5
+  - first:
+      213: -4796932125324312052
+    second: Explosion_6
+  - first:
+      213: 4348620978117878488
+    second: Explosion_7
+  - first:
+      213: 7788287979965792003
+    second: Explosion_8
+  - first:
+      213: -5876230404456235001
+    second: Explosion_9
+  - first:
+      213: -7061159883300251746
+    second: Explosion_10
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -122,7 +146,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: SingleShooter_0
+      name: Explosion_0
       rect:
         serializedVersion: 2
         x: 0
@@ -136,14 +160,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a059bee7cdb89fd30800000000000000
-      internalID: 4465754284652991754
+      spriteID: 096a1cc8477a21350800000000000000
+      internalID: 5986030973748356752
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SingleShooter_1
+      name: Explosion_1
       rect:
         serializedVersion: 2
         x: 32
@@ -157,14 +181,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f8d39fe7f6276da20800000000000000
-      internalID: 3086780417806253455
+      spriteID: fc0fb9bb7021842b0800000000000000
+      internalID: -5600206312213581617
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SingleShooter_2
+      name: Explosion_2
       rect:
         serializedVersion: 2
         x: 64
@@ -178,8 +202,92 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 36290cfdeca15b840800000000000000
-      internalID: 5239123217334964835
+      spriteID: 3e3bec60e1ef4f430800000000000000
+      internalID: 3815954189206336483
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion_3
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d4fffce843b8ccc0800000000000000
+      internalID: -3690502768834906923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion_4
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 19e8447eae3715ff0800000000000000
+      internalID: -49130668184793455
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion_5
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d47ca3943f458afd0800000000000000
+      internalID: -2330519403281856691
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Explosion_6
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c028262b5afdd6db0800000000000000
+      internalID: -4796932125324312052
       vertices: []
       indices: 
       edges: []

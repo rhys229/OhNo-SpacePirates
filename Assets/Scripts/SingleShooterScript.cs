@@ -24,6 +24,16 @@ public class SingleShooterScript : MonoBehaviour
     public PlayerScript playerScript;
     
     public bool shooting = false;
+
+    public int direction;
+    public float minDistance = -1;
+    public float maxDistance = 1;
+    public float offsetx = 0;
+
+    public GameObject explosion;
+    
+    public SpriteRenderer spriteRenderer;
+    public Sprite[] spriteArray;
     // Start is called before the first frame update
     void Start()
     {
@@ -34,11 +44,16 @@ public class SingleShooterScript : MonoBehaviour
         float delay = Random.Range(2f, 10f);
         float rate = Random.Range(2f, 8f);
         InvokeRepeating("Fire", delay, rate);
+        direction = -1;
+        minDistance = transform.position.x+minDistance;
+        maxDistance = transform.position.x+maxDistance-.5f;
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        
         if (transform.position.y < -5)
         {
             Destroy(this.gameObject);
@@ -71,8 +86,32 @@ public class SingleShooterScript : MonoBehaviour
         }
         else if (playerControlled == false)
         {
-            float offsetx = Mathf.Sin(Time.time * speed) * amplitude / 20;
-            float offsety = -.2f*(yspeed);
+            
+            switch (direction)
+            {
+                case -1:
+                    if (transform.position.x > minDistance)
+                    {
+                        offsetx = (-1*(speed))*Time.deltaTime;
+                    }
+                    else
+                    {
+                        direction = 1;
+                    }
+                    break;
+                case 1:
+                    if (transform.position.x < maxDistance)
+                    {
+                        offsetx = (1*(speed))*Time.deltaTime;
+                    }
+                    else
+                    {
+                        direction = -1;
+                    }
+                    break;
+            }
+
+            float offsety = (-1*(yspeed))*Time.deltaTime;
             Vector3 move = new Vector3(offsetx, y: offsety,0);
             transform.position = transform.position+move;
         }
@@ -93,6 +132,7 @@ public class SingleShooterScript : MonoBehaviour
             Destroy(other.gameObject);
             ManagerScript.tally++;
             playerScript.loadShip(1);
+            spriteRenderer.sprite = spriteArray[2];
         }
         if (other.gameObject.tag == "midAbductor")
         {
@@ -105,6 +145,7 @@ public class SingleShooterScript : MonoBehaviour
             Destroy(other.gameObject);
             ManagerScript.tally++;
             playerScript.loadShip(2);
+            spriteRenderer.sprite = spriteArray[2];
         }
         if (other.gameObject.tag == "rightAbductor")
         {
@@ -117,27 +158,55 @@ public class SingleShooterScript : MonoBehaviour
             Destroy(other.gameObject);
             ManagerScript.tally++;
             playerScript.loadShip(3);
+            spriteRenderer.sprite = spriteArray[2];
+        }
+
+        if (other.gameObject.tag == "Ally" && this.gameObject.tag == "Enemy")
+        {
+            Destroy(this.gameObject);
+            Destroy(other.gameObject);
+            ManagerScript.tally++;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Projectile" && this.gameObject.tag == "Enemy")
+        {
+            ManagerScript.score += 10;
         }
     }
 
     private void Fire()
     {
         int i = Random.Range(0, 100);
-        if (i > 80 && playerControlled == false) 
+        if (i > 80 && playerControlled == false)
         {
-            Instantiate(enemysingleShooterProjectile
-            , new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
+            StartCoroutine("EnemyShoot");
         }
+    }
+
+    IEnumerator EnemyShoot()
+    {
+        spriteRenderer.sprite = spriteArray[1];
+        yield return new WaitForSeconds(.6f);
+        spriteRenderer.sprite = spriteArray[2];
+        yield return new WaitForSeconds(.6f);
+        Instantiate(enemysingleShooterProjectile, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
+        spriteRenderer.sprite = spriteArray[0];
     }
     IEnumerator Shoot()
     {
         if (shooting == false)
         {
             shooting = true;
-            yield return new WaitForSeconds(.2f);
+            spriteRenderer.sprite = spriteArray[0];
             Instantiate(singleShooterProjectile, new Vector2(transform.position.x, transform.position.y),
                 Quaternion.identity);
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(1.1f);
+            spriteRenderer.sprite = spriteArray[1];
+            yield return new WaitForSeconds(1.1f);
+            spriteRenderer.sprite = spriteArray[2];
             shooting = false;
         }
     }
@@ -148,6 +217,7 @@ public class SingleShooterScript : MonoBehaviour
     }
     public void OnDestroy()
     {
+        Instantiate(explosion, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
         if (playerControlled)
         {
             playerScript.unloadShip(slot);

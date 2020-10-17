@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class ScoreManagerScript : MonoBehaviour
 {
     public GameObject manager;
@@ -10,6 +10,7 @@ public class ScoreManagerScript : MonoBehaviour
     public bool active;
 
     public int score;
+   
     // Start is called before the first frame update
     void Start()
     {

@@ -192,10 +192,16 @@ MonoBehaviour:
   playerControlled: 0
   playerObject: {fileID: 0}
   speed: 0.4
-  yspeed: 0.0006
+  yspeed: 0.08
   amplitude: 0.012
   animator: {fileID: -1041898878413765439}
   manager: {fileID: 0}
   ManagerScript: {fileID: 0}
   shooting: 0
   playerScript: {fileID: 0}
+  direction: 0
+  minDistance: -1
+  maxDistance: 1
+  offsetx: 0
+  explosion: {fileID: 9169247116604754688, guid: 26acfadb29740c343851c18c82f4756a,
+    type: 3}

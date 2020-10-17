@@ -4,14 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class SplitShooterScript : MonoBehaviour
+public class BurstShooterScript : MonoBehaviour
 {
-    public GameObject leftProjectile;
-    public GameObject midProjectile;
-    public GameObject rightProjectile;
-    public GameObject enemyleftProjectile;
-    public GameObject enemymidProjectile;
-    public GameObject enemyrightProjectile;
+    public GameObject singleShooterProjectile
+    ;
+    public GameObject enemysingleShooterProjectile
+    ;
     public int slot;
     public bool playerControlled = false;
     public GameObject playerObject;
@@ -19,23 +17,23 @@ public class SplitShooterScript : MonoBehaviour
     public float speed = 1f;
     public float yspeed = 2f;
     public float amplitude = 0.5f;
-
-    public Quaternion leftRotate = Quaternion.Euler(0,30,0);
-    public Quaternion rightRotate = Quaternion.Euler(0,-30,0);
     
     public GameObject manager;
     public EnemyManagerScript ManagerScript;
-
-    public bool shooting = false;
     
     public PlayerScript playerScript;
     
+    public bool shooting = false;
+
     public int direction;
     public float minDistance = -1;
     public float maxDistance = 1;
     public float offsetx = 0;
 
     public GameObject explosion;
+    
+    public SpriteRenderer spriteRenderer;
+    public Sprite[] spriteArray;
     // Start is called before the first frame update
     void Start()
     {
@@ -43,18 +41,19 @@ public class SplitShooterScript : MonoBehaviour
         ManagerScript = manager.GetComponent<EnemyManagerScript>();
         playerObject = GameObject.Find("Player");
         playerScript = playerObject.GetComponent<PlayerScript>();
-        
         float delay = Random.Range(2f, 10f);
         float rate = Random.Range(2f, 8f);
         InvokeRepeating("Fire", delay, rate);
         direction = -1;
         minDistance = transform.position.x+minDistance;
         maxDistance = transform.position.x+maxDistance-.5f;
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        
         if (transform.position.y < -5)
         {
             Destroy(this.gameObject);
@@ -121,6 +120,7 @@ public class SplitShooterScript : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
+        Debug.Log("Abductor Collision");
         if (other.gameObject.tag == "leftAbductor")
         {
             playerControlled = true;
@@ -132,6 +132,7 @@ public class SplitShooterScript : MonoBehaviour
             Destroy(other.gameObject);
             ManagerScript.tally++;
             playerScript.loadShip(1);
+            spriteRenderer.sprite = spriteArray[3];
         }
         if (other.gameObject.tag == "midAbductor")
         {
@@ -144,6 +145,7 @@ public class SplitShooterScript : MonoBehaviour
             Destroy(other.gameObject);
             ManagerScript.tally++;
             playerScript.loadShip(2);
+            spriteRenderer.sprite = spriteArray[3];
         }
         if (other.gameObject.tag == "rightAbductor")
         {
@@ -156,17 +158,13 @@ public class SplitShooterScript : MonoBehaviour
             Destroy(other.gameObject);
             ManagerScript.tally++;
             playerScript.loadShip(3);
+            spriteRenderer.sprite = spriteArray[3];
         }
 
-        if (other.gameObject.tag == "Ally")
+        if (other.gameObject.tag == "Ally" && this.gameObject.tag == "Enemy")
         {
+            Destroy(this.gameObject);
             Destroy(other.gameObject);
-            Destroy(this.gameObject);
-            ManagerScript.tally++;
-        }
-        if (other.gameObject.tag == "floor")
-        {
-            Destroy(this.gameObject);
             ManagerScript.tally++;
         }
     }
@@ -174,7 +172,7 @@ public class SplitShooterScript : MonoBehaviour
     {
         if (other.gameObject.tag == "Projectile" && this.gameObject.tag == "Enemy")
         {
-            ManagerScript.score += 60;
+            ManagerScript.score += 30;
         }
     }
 
@@ -187,32 +185,48 @@ public class SplitShooterScript : MonoBehaviour
         }
     }
 
-    public bool IsPlayerControlled()
+    IEnumerator EnemyShoot()
     {
-        return playerControlled;
+        spriteRenderer.sprite = spriteArray[1];
+        yield return new WaitForSeconds(.4f);
+        spriteRenderer.sprite = spriteArray[2];
+        yield return new WaitForSeconds(.4f);
+        spriteRenderer.sprite = spriteArray[3];
+        Instantiate(enemysingleShooterProjectile, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
+        yield return new WaitForSeconds(.2f);
+        Instantiate(enemysingleShooterProjectile, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
+        yield return new WaitForSeconds(.2f);
+        Instantiate(enemysingleShooterProjectile, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
+        spriteRenderer.sprite = spriteArray[0];
     }
-
     IEnumerator Shoot()
     {
         if (shooting == false)
         {
             shooting = true;
-            Instantiate(leftProjectile, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
-            Instantiate(rightProjectile, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
-            Instantiate(midProjectile, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
+            spriteRenderer.sprite = spriteArray[0];
+            Instantiate(singleShooterProjectile, new Vector2(transform.position.x, transform.position.y),
+                Quaternion.identity);
             yield return new WaitForSeconds(.2f);
+            Instantiate(singleShooterProjectile, new Vector2(transform.position.x, transform.position.y),
+                Quaternion.identity);
+            yield return new WaitForSeconds(.2f);
+            Instantiate(singleShooterProjectile, new Vector2(transform.position.x, transform.position.y),
+                Quaternion.identity);
+            yield return new WaitForSeconds(1.1f);
+            spriteRenderer.sprite = spriteArray[1];
+            yield return new WaitForSeconds(1.1f);
+            spriteRenderer.sprite = spriteArray[2];
+            yield return new WaitForSeconds(1.1f);
+            spriteRenderer.sprite = spriteArray[3];
             shooting = false;
         }
     }
 
-    IEnumerator EnemyShoot()
+    public bool IsPlayerControlled()
     {
-        yield return new WaitForSeconds(.6f);
-        Instantiate(enemyleftProjectile, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
-        Instantiate(enemyrightProjectile, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
-        Instantiate(enemymidProjectile, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
+        return playerControlled;
     }
-
     public void OnDestroy()
     {
         Instantiate(explosion, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
@@ -221,4 +235,5 @@ public class SplitShooterScript : MonoBehaviour
             playerScript.unloadShip(slot);
         }
     }
+    
 }
