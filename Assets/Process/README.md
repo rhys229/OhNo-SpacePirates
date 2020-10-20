@@ -45,3 +45,11 @@ Add explosion animation and object
 Revamp scoring system
 Fix overlapping level bug
 Rework Levels and add more
+
+## V0.25
+Added game over explosion
+Locked movement to x axis
+You now lose if enemies reach bottom
+Significantly overhauled waves and added more enemies to later waves
+Tidied up abduction
+Fixed Ray-beam not hitting when enemies were too close to the player

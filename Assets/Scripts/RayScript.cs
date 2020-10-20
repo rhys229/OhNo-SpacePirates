@@ -61,7 +61,7 @@ public class RayScript : MonoBehaviour
 
     IEnumerator beamtimer()
     {
-        yield return new WaitForSeconds(.3f);
+        yield return new WaitForSeconds(.4f);
         Destroy(this.gameObject);
     }
 }

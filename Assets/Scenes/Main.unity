@@ -606,7 +606,7 @@ MonoBehaviour:
   xSpacing: 1.1
   ySpacing: 1
   xOrigin: -3.5
-  yOrigin: -1
+  yOrigin: 0
   numRows: 6
   numColumns: 4
   Score: {fileID: 544730380}
@@ -1445,8 +1445,11 @@ MonoBehaviour:
   - {fileID: -6797291463759944310, guid: d8a45e561e1cd254d9ea6858bc903181, type: 3}
   - {fileID: -4460919757325500910, guid: d8a45e561e1cd254d9ea6858bc903181, type: 3}
   - {fileID: -7545453999009539341, guid: d8a45e561e1cd254d9ea6858bc903181, type: 3}
+  explosion: {fileID: 9169247116604754688, guid: 21849b8254f147640af091dd34b377b4,
+    type: 3}
   godMode: 0
   vulnerable: 0
+  abducting: 0
 --- !u!212 &1474535115
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1507,7 +1510,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1474535113}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.02, y: -4.32, z: 0}
+  m_LocalPosition: {x: 0.02, y: -4.25, z: 0}
   m_LocalScale: {x: 1.7, y: 1.7, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

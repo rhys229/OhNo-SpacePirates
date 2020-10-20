@@ -172,7 +172,7 @@ MonoBehaviour:
   playerControlled: 0
   playerObject: {fileID: 0}
   speed: 0.4
-  yspeed: 0.08
+  yspeed: 0.12
   amplitude: 0.5
   manager: {fileID: 0}
   ManagerScript: {fileID: 0}

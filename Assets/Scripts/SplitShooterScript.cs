@@ -58,6 +58,7 @@ public class SplitShooterScript : MonoBehaviour
         if (transform.position.y < -5)
         {
             Destroy(this.gameObject);
+            playerScript.gameOver();
             ManagerScript.tally++;
         }
         if (playerControlled == true)
@@ -123,6 +124,7 @@ public class SplitShooterScript : MonoBehaviour
     {
         if (other.gameObject.tag == "leftAbductor")
         {
+            StopCoroutine("EnemyShoot");
             playerControlled = true;
             transform.gameObject.tag = "Ally";
             transform.position = new Vector2(playerObject.transform.position.x-.65f, playerObject.transform.position.y+.35f);
@@ -135,6 +137,7 @@ public class SplitShooterScript : MonoBehaviour
         }
         if (other.gameObject.tag == "midAbductor")
         {
+            StopCoroutine("EnemyShoot");
             playerControlled = true;
             transform.gameObject.tag = "Ally";
             transform.position = new Vector2(playerObject.transform.position.x, playerObject.transform.position.y+.4f);
@@ -147,6 +150,7 @@ public class SplitShooterScript : MonoBehaviour
         }
         if (other.gameObject.tag == "rightAbductor")
         {
+            StopCoroutine("EnemyShoot");
             playerControlled = true;
             transform.gameObject.tag = "Ally";
             transform.position = new Vector2(playerObject.transform.position.x+.65f, playerObject.transform.position.y+.35f);

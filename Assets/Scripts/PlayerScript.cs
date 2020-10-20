@@ -4,12 +4,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PlayerScript : MonoBehaviour {
-    private float     xPos;
-    private float yPos;
-    public float      speed = 10f;
+public class PlayerScript : MonoBehaviour
+{
+    private float xPos;
+
+    //private float yPos;
+    public float speed = 10f;
     public float yspeed = 10f;
-    public float      leftWall, rightWall, topwall, bottomwall;
+    public float leftWall, rightWall, topwall, bottomwall;
     public int middleShipID = 1;
     public GameObject leftAbductor;
     public GameObject midAbductor;
@@ -26,13 +28,13 @@ public class PlayerScript : MonoBehaviour {
 
     public SpriteRenderer spriteRenderer;
     public Sprite[] spriteArray;
-    
+
+    public GameObject explosion;
 
     public bool godMode;
-
     public bool vulnerable;
-
     public bool abducting;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,8 +44,9 @@ public class PlayerScript : MonoBehaviour {
         lockMovement = false;
         abducting = false;
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+
     }
-    
+
 
     // Update is called once per frame
     void Update()
@@ -63,9 +66,10 @@ public class PlayerScript : MonoBehaviour {
             {
                 if (xPos < rightWall)
                 {
-                    xPos += speed*Time.deltaTime;
+                    xPos += speed * Time.deltaTime;
                 }
             }
+            /*
             if (Input.GetKey(KeyCode.UpArrow))
             {
                 if (yPos < topwall)
@@ -80,8 +84,9 @@ public class PlayerScript : MonoBehaviour {
                     yPos -= yspeed*Time.deltaTime;
                 }
             }
+            */
 
-            Vector3 moveVector = new Vector3(xPos, yPos, 0);
+            Vector3 moveVector = new Vector3(xPos, -4.3f, 0);
             transform.localPosition = moveVector;
         }
 
@@ -95,6 +100,7 @@ public class PlayerScript : MonoBehaviour {
                 }
             }
         }
+
         if (Input.GetKeyDown(midAbduct))
         {
             if (midSlotFull == false)
@@ -105,6 +111,7 @@ public class PlayerScript : MonoBehaviour {
                 }
             }
         }
+
         if (Input.GetKeyDown(rightAbduct))
         {
             if (rightSlotFull == false)
@@ -120,70 +127,87 @@ public class PlayerScript : MonoBehaviour {
         {
             if (leftSlotFull == true)
             {
-                Instantiate(slotCleaner, new Vector2(transform.position.x-.7f, transform.position.y+.5f), Quaternion.identity);
+                Instantiate(slotCleaner, new Vector2(transform.position.x - .7f, transform.position.y + .5f),
+                    Quaternion.identity);
             }
         }
+
         if (Input.GetKeyDown(KeyCode.X))
         {
             if (midSlotFull == true)
             {
-                Instantiate(slotCleaner, new Vector2(transform.position.x, transform.position.y+.5f), Quaternion.identity);
+                Instantiate(slotCleaner, new Vector2(transform.position.x, transform.position.y + .5f),
+                    Quaternion.identity);
             }
         }
+
         if (Input.GetKeyDown(KeyCode.C))
         {
             if (rightSlotFull == true)
             {
-                Instantiate(slotCleaner, new Vector2(transform.position.x+.7f, transform.position.y+.5f), Quaternion.identity);
+                Instantiate(slotCleaner, new Vector2(transform.position.x + .7f, transform.position.y + .5f),
+                    Quaternion.identity);
             }
         }
 
-            
+
     }
+
     IEnumerator leftAbduction()
     {
         abducting = true;
-        GameObject leftAbductorInstantiated = Instantiate(leftAbductor, new Vector2(transform.position.x-.7f, transform.position.y+ .7f), Quaternion.identity);
+        GameObject leftAbductorInstantiated = Instantiate(leftAbductor,
+            new Vector2(transform.position.x - .7f, transform.position.y + .7f), Quaternion.identity);
         lockMovement = true;
         yield return new WaitForSeconds(1.5f);
         lockMovement = false;
         Destroy(leftAbductorInstantiated);
         abducting = false;
     }
+
     IEnumerator midAbduction()
     {
         abducting = true;
-        GameObject midAbductorInstantiated = Instantiate(midAbductor, new Vector2(transform.position.x, transform.position.y+ 0.7f), Quaternion.identity);
+        GameObject midAbductorInstantiated = Instantiate(midAbductor,
+            new Vector2(transform.position.x, transform.position.y + 0.7f), Quaternion.identity);
         lockMovement = true;
         yield return new WaitForSeconds(1.5f);
         lockMovement = false;
         Destroy(midAbductorInstantiated);
         abducting = false;
     }
+
     IEnumerator rightAbduction()
     {
         abducting = true;
-        GameObject rightAbductorInstantiated = Instantiate(rightAbductor, new Vector2(transform.position.x+.7f, transform.position.y+ 0.7f), Quaternion.identity);
+        GameObject rightAbductorInstantiated = Instantiate(rightAbductor,
+            new Vector2(transform.position.x + .7f, transform.position.y + 0.7f), Quaternion.identity);
         lockMovement = true;
         yield return new WaitForSeconds(1.5f);
         lockMovement = false;
         Destroy(rightAbductorInstantiated);
         abducting = false;
     }
+    
 
     public void loadShip(int slot)
     {
         if (slot == 1)
         {
             leftSlotFull = true;
+            lockMovement = false;
         }
+
         if (slot == 2)
         {
             midSlotFull = true;
+            lockMovement = false;
         }
+
         if (slot == 3)
         {
             rightSlotFull = true;
+            lockMovement = false;
         }
     }
 
@@ -193,10 +217,12 @@ public class PlayerScript : MonoBehaviour {
         {
             leftSlotFull = false;
         }
+
         if (slot == 2)
         {
             midSlotFull = false;
         }
+
         if (slot == 3)
         {
             rightSlotFull = false;
@@ -212,7 +238,7 @@ public class PlayerScript : MonoBehaviour {
                 StartCoroutine("gameover");
             }
         }
-        
+
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -224,6 +250,11 @@ public class PlayerScript : MonoBehaviour {
                 StartCoroutine("gameover");
             }
         }
+    }
+
+    public void gameOver() 
+    { 
+        StartCoroutine("gameover");
     }
 
     public void updateShip() 
@@ -273,11 +304,19 @@ public class PlayerScript : MonoBehaviour {
 
     IEnumerator gameover()
     {
+        Instantiate(explosion, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
+        yield return new WaitForSeconds(1f);
         GameObject[] enemyObjects;
         enemyObjects = GameObject.FindGameObjectsWithTag("Enemy");
         foreach (GameObject enemy in enemyObjects)
         {
             GameObject.Destroy(enemy);
+        }
+        GameObject[] allyObjects;
+        allyObjects = GameObject.FindGameObjectsWithTag("Ally");
+        foreach (GameObject ally in allyObjects)
+        {
+            GameObject.Destroy(ally);
         }
         yield return new WaitForSeconds(.1f);
         SceneManager.LoadScene("GameOver");

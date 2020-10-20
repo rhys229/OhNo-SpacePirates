@@ -53,6 +53,7 @@ public class TwinShooterScript : MonoBehaviour
         if (transform.position.y < -5)
         {
             Destroy(this.gameObject);
+            playerScript.gameOver();
             ManagerScript.tally++;
         }
         if (playerControlled == true)
@@ -118,6 +119,7 @@ public class TwinShooterScript : MonoBehaviour
     {
         if (other.gameObject.tag == "leftAbductor")
         {
+            StopCoroutine("EnemyShoot");
             playerControlled = true;
             transform.gameObject.tag = "Ally";
             transform.position = new Vector2(playerObject.transform.position.x-.65f, playerObject.transform.position.y+.35f);
@@ -130,6 +132,7 @@ public class TwinShooterScript : MonoBehaviour
         }
         if (other.gameObject.tag == "midAbductor")
         {
+            StopCoroutine("EnemyShoot");
             playerControlled = true;
             transform.gameObject.tag = "Ally";
             transform.position = new Vector2(playerObject.transform.position.x, playerObject.transform.position.y+.4f);
@@ -142,6 +145,7 @@ public class TwinShooterScript : MonoBehaviour
         }
         if (other.gameObject.tag == "rightAbductor")
         {
+            StopCoroutine("EnemyShoot");
             playerControlled = true;
             transform.gameObject.tag = "Ally";
             transform.position = new Vector2(playerObject.transform.position.x+.65f, playerObject.transform.position.y+.35f);
@@ -177,16 +181,22 @@ public class TwinShooterScript : MonoBehaviour
     private void Fire()
     {
         int i = Random.Range(0, 100);
-        if (i > 60 && playerControlled == false) 
+        if (i > 60 && playerControlled == false)
         {
-            Instantiate(enemyTwinProjectile, new Vector2(transform.position.x, transform.position.y+.5f), Quaternion.identity);
-            animator.SetTrigger("Shoot");
+            StartCoroutine("EnemyShoot");
         }
     }
 
     public bool IsPlayerControlled()
     {
         return playerControlled;
+    }
+
+    IEnumerator EnemyShoot()
+    {
+        animator.SetTrigger("Shoot");
+        yield return new WaitForSeconds(.2f);
+        Instantiate(enemyTwinProjectile, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
     }
 
     IEnumerator Shoot()
