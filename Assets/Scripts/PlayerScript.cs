@@ -157,7 +157,7 @@ public class PlayerScript : MonoBehaviour
     {
         abducting = true;
         GameObject leftAbductorInstantiated = Instantiate(leftAbductor,
-            new Vector2(transform.position.x - .7f, transform.position.y + .7f), Quaternion.identity);
+            new Vector2(transform.position.x - .7f, transform.position.y + .9f), Quaternion.identity);
         lockMovement = true;
         yield return new WaitForSeconds(1.5f);
         lockMovement = false;
@@ -169,7 +169,7 @@ public class PlayerScript : MonoBehaviour
     {
         abducting = true;
         GameObject midAbductorInstantiated = Instantiate(midAbductor,
-            new Vector2(transform.position.x, transform.position.y + 0.7f), Quaternion.identity);
+            new Vector2(transform.position.x, transform.position.y + 0.9f), Quaternion.identity);
         lockMovement = true;
         yield return new WaitForSeconds(1.5f);
         lockMovement = false;
@@ -181,7 +181,7 @@ public class PlayerScript : MonoBehaviour
     {
         abducting = true;
         GameObject rightAbductorInstantiated = Instantiate(rightAbductor,
-            new Vector2(transform.position.x + .7f, transform.position.y + 0.7f), Quaternion.identity);
+            new Vector2(transform.position.x + .7f, transform.position.y + 0.9f), Quaternion.identity);
         lockMovement = true;
         yield return new WaitForSeconds(1.5f);
         lockMovement = false;
