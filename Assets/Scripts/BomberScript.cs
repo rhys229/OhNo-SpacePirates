@@ -31,9 +31,14 @@ public class BomberScript : MonoBehaviour
     public float offsetx = 0;
     
     public GameObject explosion;
+
+    public AudioSource shootSound;
+
+    public bool spedUp;
     // Start is called before the first frame update
     void Start()
     {
+        spedUp = false;
         manager = GameObject.Find("EnemyManager");
         ManagerScript = manager.GetComponent<EnemyManagerScript>();
         playerObject = GameObject.Find("Player");
@@ -42,8 +47,15 @@ public class BomberScript : MonoBehaviour
         float delay = Random.Range(2f, 10f);
         float rate = Random.Range(2f, 8f);
         InvokeRepeating("Fire", delay, rate);
-        
-        direction = -1;
+        int yposition = (int) transform.position.y;
+        if (yposition % 2 == 0)
+        {
+            direction = -1;
+        }
+        else
+        {
+            direction = 1;
+        }
         minDistance = transform.position.x+minDistance;
         maxDistance = transform.position.x+maxDistance-.5f;
     }
@@ -51,9 +63,17 @@ public class BomberScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        GameObject[] enemyObjects;
+        enemyObjects = GameObject.FindGameObjectsWithTag("Enemy");
+        if (enemyObjects.Length < 3 && spedUp == false)
+        {
+            yspeed = yspeed * 2.5f;
+            spedUp = true;
+        }
         if (transform.position.y < -5)
         {
             Destroy(this.gameObject);
+            playerScript.gameOver();
             ManagerScript.tally++;
         }
         if (playerControlled == true)
@@ -200,6 +220,7 @@ public class BomberScript : MonoBehaviour
             animator.SetTrigger("Shoot");
             yield return new WaitForSeconds(.2f);
             Instantiate(Projectile, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
+            shootSound.Play();
             yield return new WaitForSeconds(4f);
             shooting = false;
         }
@@ -210,6 +231,7 @@ public class BomberScript : MonoBehaviour
         animator.SetTrigger("Shoot");
         yield return new WaitForSeconds(.6f);
         Instantiate(enemyProjectile, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
+        shootSound.Play();
     }
 
     public void OnDestroy()

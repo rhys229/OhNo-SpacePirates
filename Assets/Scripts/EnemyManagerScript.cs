@@ -17,6 +17,7 @@ public class EnemyManagerScript : MonoBehaviour
     public Transform SplitShooter;
     public Transform StealthShip;
     public Transform BurstShooter;
+    public Transform ShieldShip;
 
     public int score = 0;
     public int tally = 0;
@@ -51,6 +52,7 @@ public class EnemyManagerScript : MonoBehaviour
         
         scoreManager = GameObject.Find("ScoreManager");
         scoreManagerScript = scoreManager.GetComponent<ScoreManagerScript>();
+        scoreManagerScript.revive();
     }
 
     
@@ -108,6 +110,12 @@ public class EnemyManagerScript : MonoBehaviour
         yield return new WaitForSeconds(5);
         int[,] levelMatrix = levelHolder(level);
         enemySpawner(levelMatrix);
+        if (level == 1)
+        {
+            Instantiate(SingleShooter, new Vector2(0, -1), Quaternion.identity);
+            Instantiate(SingleShooter, new Vector2(-1, -1), Quaternion.identity);
+            Instantiate(SingleShooter, new Vector2(1, -1), Quaternion.identity);
+        }
         Level.gameObject.SetActive(false);
         LevelText.gameObject.SetActive(false);
         levelInProgress = true;
@@ -154,14 +162,14 @@ public class EnemyManagerScript : MonoBehaviour
                         bb.transform.position = bbloc;
                         break;
                     case 5:
+                        Transform sh = Instantiate(ShieldShip);
+                        Vector2 shloc = new Vector2(xOrigin + (i * xSpacing), (yOrigin + 6) - (j * ySpacing));
+                        sh.transform.position = shloc;
+                        break;
+                    case 6:
                         Transform rb = Instantiate(RayBeamShip);
                         Vector2 rbloc = new Vector2(xOrigin + (i * xSpacing), (yOrigin + 6) - (j * ySpacing));
                         rb.transform.position = rbloc;
-                        break;
-                    case 6:
-                        Transform st = Instantiate(StealthShip);
-                        Vector2 stloc = new Vector2(xOrigin + (i * xSpacing), (yOrigin + 6) - (j * ySpacing));
-                        st.transform.position = stloc;
                         break;
                     case 7:
                         Transform sk = Instantiate(SkullShip);
@@ -177,6 +185,11 @@ public class EnemyManagerScript : MonoBehaviour
                         Transform sp = Instantiate(SplitShooter);
                         Vector2 sploc = new Vector2(xOrigin + (i * xSpacing), (yOrigin + 6) - (j * ySpacing));
                         sp.transform.position = sploc;
+                        break;
+                    case 10:
+                        Transform st = Instantiate(StealthShip);
+                        Vector2 stloc = new Vector2(xOrigin + (i * xSpacing), (yOrigin + 6) - (j * ySpacing));
+                        st.transform.position = stloc;
                         break;
                     
                 }
@@ -225,7 +238,7 @@ public class EnemyManagerScript : MonoBehaviour
         {
             case 1:
                 tally = tally + 16;
-                return new int [,] {{1,1,1,1,1,1,1,1},{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{0,0,1,1,1,1,0,0}};
+                return new int [,] {{1,1,1,1,1,1,1,1},{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0}};
                 break;
             case 2:
                 return new int [,] {{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{1,1,2,2,2,2,1,1},{1,1,1,1,1,1,1,1},{1,1,1,1,1,1,1,1},{0,0,0,0,0,0,0,0}};
@@ -234,7 +247,7 @@ public class EnemyManagerScript : MonoBehaviour
                 return new int [,] {{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{2,2,2,2,2,2,2,2},{1,1,1,1,1,1,1,1},{1,1,1,1,1,1,1,1},{0,0,0,0,0,0,0,0}};
                 break;
             case 4:
-                return new int [,] {{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{2,2,2,2,2,2,2,2},{2,2,2,1,1,2,2,2},{1,1,1,1,1,1,1,1},{0,0,0,0,0,0,0,0}};
+                return new int [,] {{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{2,2,2,3,3,2,2,2},{1,1,1,1,1,1,1,1},{1,1,1,1,1,1,1,1},{0,0,0,0,0,0,0,0}};
                 break;
             case 5:
                 return new int [,] {{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{2,2,2,3,3,2,2,2},{1,1,2,2,2,2,1,1},{1,1,1,1,1,1,1,1},{0,0,0,0,0,0,0,0}}; 
@@ -267,7 +280,7 @@ public class EnemyManagerScript : MonoBehaviour
                 return new int [,] {{0,0,0,0,0,0,0,0},{4,4,5,5,5,5,4,4},{4,4,4,4,4,4,4,4},{3,3,3,3,3,3,3,3},{4,4,4,4,4,4,4,4},{2,2,2,2,2,2,2,2}};
                 break;
             case 15:
-                return new int [,] {{0,0,0,0,0,0,0,0},{5,5,5,5,5,5,5,5},{4,4,4,4,4,4,4,4},{3,3,3,3,3,3,3,3},{4,4,4,4,4,4,4,4},{2,2,2,2,2,2,2,2}};
+                return new int [,] {{0,0,0,0,0,0,0,0},{4,4,5,5,5,5,4,4},{4,4,4,4,4,4,4,4},{3,3,3,3,3,3,3,3},{5,5,4,4,4,4,5,5},{2,2,2,2,2,2,2,2}};
                 break;
             case 16:
                 return new int [,] {{0,0,0,0,0,0,0,0},{5,5,5,6,6,5,5,5},{4,4,4,4,4,4,4,4},{3,3,3,3,3,3,3,3},{4,4,4,4,4,4,4,4},{2,2,2,2,2,2,2,2}};
@@ -282,19 +295,31 @@ public class EnemyManagerScript : MonoBehaviour
                 return new int [,] {{6,6,6,6,6,6,6,6},{5,5,5,5,5,5,5,5},{4,4,4,4,4,4,4,4},{3,5,3,5,3,5,3,5},{4,4,4,4,4,4,4,4},{3,3,3,3,3,3,3,3}};
                 break;
             case 20:
-                return new int [,] {{6,6,6,6,6,6,6,6},{5,5,5,5,5,5,5,5},{4,4,4,4,4,4,4,4},{5,5,5,5,5,5,5,5},{4,4,4,4,4,4,4,4},{3,3,3,3,3,3,3,3}};
+                return new int [,] {{6,6,6,6,6,6,6,6},{4,4,4,4,4,4,4,4},{4,4,4,4,4,4,4,4},{5,5,5,5,5,5,5,5},{4,4,4,4,4,4,4,4},{3,3,3,3,3,3,3,3}};
                 break;
             case 21:
-                return new int [,] {{6,6,6,6,6,6,6,6},{5,5,5,5,5,5,5,5},{4,4,4,4,4,4,4,4},{5,5,5,5,5,5,5,5},{4,4,4,4,4,4,4,4},{5,5,5,5,5,5,5,5}};
+                return new int [,] {{6,6,6,10,10,6,6,6},{5,5,5,5,5,5,5,5},{4,4,4,4,4,4,4,4},{5,5,5,5,5,5,5,5},{4,4,4,4,4,4,4,4},{3,3,3,3,3,3,3,3}};
                 break;
             case 22:
-                return new int [,] {{6,6,6,6,6,6,6,6},{5,5,5,5,5,5,5,5},{5,5,5,5,5,5,5,5},{5,5,5,5,5,5,5,5},{4,4,4,4,4,4,4,4},{5,5,5,5,5,5,5,5}};
+                return new int [,] {{6,6,10,10,10,10,6,6},{6,6,5,5,5,5,6,6},{4,4,4,4,4,4,4,4},{5,5,5,5,5,5,5,5},{4,4,4,4,4,4,4,4},{3,3,3,3,3,3,3,3}};
                 break;
             case 23:
-                return new int [,] {{6,6,6,6,6,6,6,6},{5,5,5,5,5,5,5,5},{6,6,6,6,6,6,6,6},{5,5,5,5,5,5,5,5},{5,5,5,5,5,5,5,5},{5,5,5,5,5,5,5,5}};
+                return new int [,] {{10,10,10,10,10,10,10,10},{4,4,4,4,4,4,4,4},{6,6,6,6,6,6,6,6},{5,5,5,5,5,5,5,5},{4,4,4,4,4,4,4,4},{5,5,5,5,5,5,5,5}};
+                break;
+            case 24:
+                return new int [,] {{10,10,10,10,10,10,10,10},{4,4,4,4,4,4,4,4},{6,6,6,6,6,6,6,6},{6,6,6,5,5,6,6,6},{4,4,4,4,4,4,4,4},{5,5,5,5,5,5,5,5}};
+                break;
+            case 25:
+                return new int [,] {{10,10,10,10,10,10,10,10},{4,4,4,10,10,4,4,4},{6,6,6,6,6,6,6,6},{6,6,6,6,6,6,6,6},{10,10,4,4,4,4,10,10},{5,5,5,5,5,5,5,5}};
+                break;
+            case 26:
+                return new int [,] {{10,10,10,10,10,10,10,10},{10,4,4,10,10,4,4,10},{6,6,6,6,6,6,6,6},{6,6,6,6,6,6,6,6},{10,10,10,4,4,10,10,10},{5,5,5,5,5,5,5,5}};
+                break;
+            case 27:
+                return new int [,] {{10,10,10,10,10,10,10,10},{10,10,10,10,10,10,10,10},{6,6,6,6,6,6,6,6},{6,6,6,6,6,6,6,6},{10,10,10,10,10,10,10,10},{5,5,5,5,5,5,5,5}};
                 break;
         }
-        return new int [,] {{6,6,6,6,6,6,6,6},{5,5,5,5,5,5,5,5},{6,6,6,6,6,6,6,6},{5,5,5,5,5,5,5,5},{6,6,6,6,6,6,6,6},{5,5,5,5,5,5,5,5}};
+        return new int [,] {{10,10,10,10,10,10,10,10},{10,10,10,10,10,10,10,10},{6,6,6,6,6,6,6,6},{6,6,6,6,6,6,6,6},{10,10,10,10,10,10,10,10},{5,5,5,5,5,5,5,5}};
     }
 
     private void OnDestroy()

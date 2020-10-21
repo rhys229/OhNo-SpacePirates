@@ -7,11 +7,14 @@ using UnityEngine.SceneManagement;
 public class GameOverScript : MonoBehaviour
 {
     public Text FinalScore;
+    public Text HighScore;
+    public Text NewHighScore;
     public GameObject ScoreManager;
     public ScoreManagerScript ScoreManagerScript;
     // Start is called before the first frame update
     void Start()
     {
+        NewHighScore.gameObject.SetActive(false);
         StartCoroutine("gameover");
     }
 
@@ -30,6 +33,14 @@ public class GameOverScript : MonoBehaviour
         ScoreManager = GameObject.Find("ScoreManager");
         ScoreManagerScript = ScoreManager.GetComponent<ScoreManagerScript>();
         int finalscore = ScoreManagerScript.score;
+        int highscore = PlayerPrefs.GetInt("highscore", 0);
+        if (finalscore > highscore)
+        {
+            PlayerPrefs.SetInt("highscore",finalscore);
+            NewHighScore.gameObject.SetActive(true);
+        }
+        highscore = PlayerPrefs.GetInt("highscore", 0);
         FinalScore.text = finalscore.ToString();
+        HighScore.text = highscore.ToString();
     }
 }

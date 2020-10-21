@@ -11,7 +11,8 @@ public class EnemyBombScript : MonoBehaviour
     public Animator animator;
     public CircleCollider2D collider;
     public bool exploding = false;
-    
+
+    public AudioSource explosion;
     // Start is called before the first frame update
     void Start()
     {
@@ -86,6 +87,7 @@ public class EnemyBombScript : MonoBehaviour
         exploding = true;
         rb.velocity = Vector2.zero;
         animator.SetTrigger("Explode");
+        explosion.Play();
         collider.radius = .1f;
         yield return new WaitForSeconds(.1f);
         collider.radius = .2f;

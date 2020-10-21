@@ -36,6 +36,8 @@ public class SplitShooterScript : MonoBehaviour
     public float offsetx = 0;
 
     public GameObject explosion;
+
+    public AudioSource shootSound;
     // Start is called before the first frame update
     void Start()
     {
@@ -47,7 +49,15 @@ public class SplitShooterScript : MonoBehaviour
         float delay = Random.Range(2f, 10f);
         float rate = Random.Range(2f, 8f);
         InvokeRepeating("Fire", delay, rate);
-        direction = -1;
+        int yposition = (int) transform.position.y;
+        if (yposition % 2 == 0)
+        {
+            direction = -1;
+        }
+        else
+        {
+            direction = 1;
+        }
         minDistance = transform.position.x+minDistance;
         maxDistance = transform.position.x+maxDistance-.5f;
     }
@@ -201,10 +211,11 @@ public class SplitShooterScript : MonoBehaviour
         if (shooting == false)
         {
             shooting = true;
+            shootSound.Play();
             Instantiate(leftProjectile, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
             Instantiate(rightProjectile, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
             Instantiate(midProjectile, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
-            yield return new WaitForSeconds(.8f);
+            yield return new WaitForSeconds(1f);
             shooting = false;
         }
     }
@@ -212,6 +223,7 @@ public class SplitShooterScript : MonoBehaviour
     IEnumerator EnemyShoot()
     {
         yield return new WaitForSeconds(.6f);
+        shootSound.Play();
         Instantiate(enemyleftProjectile, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
         Instantiate(enemyrightProjectile, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
         Instantiate(enemymidProjectile, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);

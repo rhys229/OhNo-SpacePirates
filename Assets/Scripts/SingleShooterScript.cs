@@ -34,6 +34,10 @@ public class SingleShooterScript : MonoBehaviour
     
     public SpriteRenderer spriteRenderer;
     public Sprite[] spriteArray;
+
+    public AudioSource shootSound;
+
+    public bool spedUp;
     // Start is called before the first frame update
     void Start()
     {
@@ -44,16 +48,31 @@ public class SingleShooterScript : MonoBehaviour
         float delay = Random.Range(2f, 10f);
         float rate = Random.Range(2f, 8f);
         InvokeRepeating("Fire", delay, rate);
-        direction = -1;
+        int yposition = (int) transform.position.y;
+        if (yposition % 2 == 0)
+        {
+            direction = -1;
+        }
+        else
+        {
+            direction = 1;
+        }
         minDistance = transform.position.x+minDistance;
         maxDistance = transform.position.x+maxDistance-.5f;
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        spedUp = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        GameObject[] enemyObjects;
+        enemyObjects = GameObject.FindGameObjectsWithTag("Enemy");
+        if (enemyObjects.Length < 3 && spedUp == false)
+        {
+            yspeed = yspeed * 2.5f;
+            spedUp = true;
+        }
         if (transform.position.y < -5)
         {
             Destroy(this.gameObject);
@@ -196,6 +215,7 @@ public class SingleShooterScript : MonoBehaviour
         yield return new WaitForSeconds(.6f);
         spriteRenderer.sprite = spriteArray[2];
         yield return new WaitForSeconds(.6f);
+        shootSound.Play();
         Instantiate(enemysingleShooterProjectile, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
         spriteRenderer.sprite = spriteArray[0];
     }
@@ -205,6 +225,7 @@ public class SingleShooterScript : MonoBehaviour
         {
             shooting = true;
             spriteRenderer.sprite = spriteArray[0];
+            shootSound.Play();
             Instantiate(singleShooterProjectile, new Vector2(transform.position.x, transform.position.y),
                 Quaternion.identity);
             yield return new WaitForSeconds(1.1f);

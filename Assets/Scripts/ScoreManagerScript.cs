@@ -37,4 +37,9 @@ public class ScoreManagerScript : MonoBehaviour
     {
         active = false;
     }
+
+    public void revive()
+    {
+        Start();
+    }
 }

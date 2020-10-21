@@ -34,9 +34,14 @@ public class BurstShooterScript : MonoBehaviour
     
     public SpriteRenderer spriteRenderer;
     public Sprite[] spriteArray;
+
+    public AudioSource shootSound;
+
+    public bool spedUp;
     // Start is called before the first frame update
     void Start()
     {
+        spedUp = false;
         manager = GameObject.Find("EnemyManager");
         ManagerScript = manager.GetComponent<EnemyManagerScript>();
         playerObject = GameObject.Find("Player");
@@ -44,7 +49,15 @@ public class BurstShooterScript : MonoBehaviour
         float delay = Random.Range(2f, 10f);
         float rate = Random.Range(2f, 8f);
         InvokeRepeating("Fire", delay, rate);
-        direction = -1;
+        int yposition = (int) transform.position.y;
+        if (yposition % 2 == 0)
+        {
+            direction = -1;
+        }
+        else
+        {
+            direction = 1;
+        }
         minDistance = transform.position.x+minDistance;
         maxDistance = transform.position.x+maxDistance-.5f;
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
@@ -53,7 +66,13 @@ public class BurstShooterScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        GameObject[] enemyObjects;
+        enemyObjects = GameObject.FindGameObjectsWithTag("Enemy");
+        if (enemyObjects.Length < 3 && spedUp == false)
+        {
+            yspeed = yspeed * 2.5f;
+            spedUp = true;
+        }
         if (transform.position.y < -5)
         {
             Destroy(this.gameObject);
@@ -196,10 +215,13 @@ public class BurstShooterScript : MonoBehaviour
         spriteRenderer.sprite = spriteArray[2];
         yield return new WaitForSeconds(.4f);
         spriteRenderer.sprite = spriteArray[3];
+        shootSound.Play();
         Instantiate(enemysingleShooterProjectile, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
         yield return new WaitForSeconds(.2f);
+        shootSound.Play();
         Instantiate(enemysingleShooterProjectile, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
         yield return new WaitForSeconds(.2f);
+        shootSound.Play();
         Instantiate(enemysingleShooterProjectile, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
         spriteRenderer.sprite = spriteArray[0];
     }
@@ -209,12 +231,15 @@ public class BurstShooterScript : MonoBehaviour
         {
             shooting = true;
             spriteRenderer.sprite = spriteArray[0];
+            shootSound.Play();
             Instantiate(singleShooterProjectile, new Vector2(transform.position.x, transform.position.y),
                 Quaternion.identity);
             yield return new WaitForSeconds(.2f);
+            shootSound.Play();
             Instantiate(singleShooterProjectile, new Vector2(transform.position.x, transform.position.y),
                 Quaternion.identity);
             yield return new WaitForSeconds(.2f);
+            shootSound.Play();
             Instantiate(singleShooterProjectile, new Vector2(transform.position.x, transform.position.y),
                 Quaternion.identity);
             yield return new WaitForSeconds(1.1f);

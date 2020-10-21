@@ -53,3 +53,13 @@ You now lose if enemies reach bottom
 Significantly overhauled waves and added more enemies to later waves
 Tidied up abduction
 Fixed Ray-beam not hitting when enemies were too close to the player
+
+## V0.3
+Added full game audio
+Added local high score
+Added Shield ship
+Varied ship movement more
+Introduced burst shot faster
+Made level 1 go faster
+Increased ship speed if there is only 1 or 2 left
+

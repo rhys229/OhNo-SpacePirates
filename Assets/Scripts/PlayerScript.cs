@@ -34,7 +34,8 @@ public class PlayerScript : MonoBehaviour
     public bool godMode;
     public bool vulnerable;
     public bool abducting;
-
+    
+    public AudioSource Abduction;
     // Start is called before the first frame update
     void Start()
     {
@@ -155,6 +156,7 @@ public class PlayerScript : MonoBehaviour
 
     IEnumerator leftAbduction()
     {
+        Abduction.Play();
         abducting = true;
         GameObject leftAbductorInstantiated = Instantiate(leftAbductor,
             new Vector2(transform.position.x - .7f, transform.position.y + .9f), Quaternion.identity);
@@ -167,6 +169,7 @@ public class PlayerScript : MonoBehaviour
 
     IEnumerator midAbduction()
     {
+        Abduction.Play();
         abducting = true;
         GameObject midAbductorInstantiated = Instantiate(midAbductor,
             new Vector2(transform.position.x, transform.position.y + 0.9f), Quaternion.identity);
@@ -179,6 +182,7 @@ public class PlayerScript : MonoBehaviour
 
     IEnumerator rightAbduction()
     {
+        Abduction.Play();
         abducting = true;
         GameObject rightAbductorInstantiated = Instantiate(rightAbductor,
             new Vector2(transform.position.x + .7f, transform.position.y + 0.9f), Quaternion.identity);
@@ -305,7 +309,7 @@ public class PlayerScript : MonoBehaviour
     IEnumerator gameover()
     {
         Instantiate(explosion, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
         GameObject[] enemyObjects;
         enemyObjects = GameObject.FindGameObjectsWithTag("Enemy");
         foreach (GameObject enemy in enemyObjects)

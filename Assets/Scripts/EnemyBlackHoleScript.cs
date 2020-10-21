@@ -13,7 +13,7 @@ public class EnemyBlackHoleScript : MonoBehaviour
     public Animator animator;
     public CircleCollider2D collider;
     public bool exploding = false;
-    public int i;
+    
     
     // Start is called before the first frame update
     void Start()
@@ -22,12 +22,12 @@ public class EnemyBlackHoleScript : MonoBehaviour
         animator = this.GetComponent<Animator>();
         collider = GetComponent<CircleCollider2D>();
         StartCoroutine("Launch");
-        i = Random.Range(-4,0);
+        
     }
 
     private void Update()
     {
-        if (exploding == false && transform.position.y < i)
+        if (exploding == false && transform.position.y < -3.7f)
         {
             StartCoroutine("Explode");
         }
@@ -93,7 +93,7 @@ public class EnemyBlackHoleScript : MonoBehaviour
         Debug.Log("Exploding");
         exploding = true;
         rb.velocity = Vector2.zero;
-        yield return new WaitForSeconds(8f);
+        yield return new WaitForSeconds(6f);
         Destroy(this.gameObject);
         exploding = false;
     }

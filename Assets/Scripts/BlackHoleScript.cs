@@ -31,7 +31,6 @@ public class BlackHoleScript : MonoBehaviour
     private IEnumerator Launch() {
         //yield return new WaitForSeconds(1);
         //rb.AddForce(transform.right * -1);
-        yield return new WaitForSeconds(.6f);
         rb.AddForce(transform.up * speed * direction);
         yield return null;
     }
