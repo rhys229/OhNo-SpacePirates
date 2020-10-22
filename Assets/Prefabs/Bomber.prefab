@@ -207,6 +207,7 @@ MonoBehaviour:
   explosion: {fileID: 9169247116604754688, guid: 26acfadb29740c343851c18c82f4756a,
     type: 3}
   shootSound: {fileID: -6385360877060137293}
+  spedUp: 0
 --- !u!82 &-6385360877060137293
 AudioSource:
   m_ObjectHideFlags: 0
@@ -217,7 +218,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: bedd0042399acae4b8ed41959877389d, type: 3}
+  m_audioClip: {fileID: 8300000, guid: c1656e662e4dccb4dbd16ad7012a98ed, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.861
   m_Pitch: 1

@@ -18,6 +18,7 @@ public class EnemyManagerScript : MonoBehaviour
     public Transform StealthShip;
     public Transform BurstShooter;
     public Transform ShieldShip;
+    public Transform BoomerangShip;
 
     public int score = 0;
     public int tally = 0;
@@ -35,7 +36,10 @@ public class EnemyManagerScript : MonoBehaviour
     public Text PirateText;
 
     public AudioSource MainMusic;
+    public AudioSource MainMusic2;
+    public AudioSource MainMusic3;
     public AudioSource PirateMusic;
+    public AudioSource PirateMusic2;
     
     public GameObject scoreManager;
     public ScoreManagerScript scoreManagerScript;
@@ -81,17 +85,46 @@ public class EnemyManagerScript : MonoBehaviour
             int i = Random.Range(0, 100);
             if (i < 25 && level > 3)
             {
-                MainMusic.Pause();
-                PirateMusic.Play();
+                if (PirateMusic.isPlaying == false && pirateLevel < 5)
+                {
+                    PirateMusic.Play();
+                    MainMusic3.Pause();
+                    MainMusic2.Pause();
+                    MainMusic.Pause();
+                }
+                if (PirateMusic2.isPlaying == false && pirateLevel > 4)
+                {
+                    PirateMusic2.Play();
+                    PirateMusic.Pause();
+                    MainMusic3.Pause();
+                    MainMusic2.Pause();
+                    MainMusic.Pause();
+                }
                 pirateLevel++;
                 StartCoroutine("pirateTransfer", pirateLevel);
             }
             else
             {
-                if (MainMusic.isPlaying == false)
+                if (MainMusic.isPlaying == false && level < 10)
                 {
                     MainMusic.Play();
                     PirateMusic.Pause();
+                    PirateMusic2.Pause();
+                }
+                if (MainMusic2.isPlaying == false && level > 9)
+                {
+                    MainMusic2.Play();
+                    MainMusic.Pause();
+                    PirateMusic.Pause();
+                    PirateMusic2.Pause();
+                }
+                if (MainMusic3.isPlaying == false && level > 27)
+                {
+                    MainMusic3.Play();
+                    MainMusic2.Pause();
+                    MainMusic.Pause();
+                    PirateMusic.Pause();
+                    PirateMusic2.Pause();
                 }
                 level++;
                 StartCoroutine("levelTransfer", level);
@@ -191,6 +224,11 @@ public class EnemyManagerScript : MonoBehaviour
                         Vector2 stloc = new Vector2(xOrigin + (i * xSpacing), (yOrigin + 6) - (j * ySpacing));
                         st.transform.position = stloc;
                         break;
+                    case 11:
+                        Transform bg = Instantiate(BoomerangShip);
+                        Vector2 bgloc = new Vector2(xOrigin + (i * xSpacing), (yOrigin + 6) - (j * ySpacing));
+                        bg.transform.position = bgloc;
+                        break;
                     
                 }
             }
@@ -217,20 +255,38 @@ public class EnemyManagerScript : MonoBehaviour
                 break;
             case 4:
                 tally = tally + 8;
-                return new int [,] {{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{8,7,8,7,8,7,8,7},{8,9,8,9,8,9,8,9},{0,0,0,0,0,0,0,0}}; 
+                return new int [,] {{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{8,7,8,7,8,7,8,7},{8,11,8,11,8,11,8,11},{0,0,0,0,0,0,0,0}}; 
                 break;
             case 5:
-                return new int [,] {{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{8,7,8,7,8,7,8,7},{8,9,8,9,8,9,8,9},{7,7,7,7,7,7,7,7}};
+                return new int [,] {{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{8,7,8,7,8,7,8,7},{8,11,8,11,8,11,8,11},{7,7,7,7,7,7,7,7}};
                 break;
             case 6:
-                return new int [,] {{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{9,9,9,9,9,9,9,9},{8,7,8,7,8,7,8,7},{8,8,8,8,8,8,8,8},{7,7,7,7,7,7,7,7}};
+                return new int [,] {{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{0,0,0,11,11,0,0,0},{8,7,8,7,8,7,8,7},{8,11,8,11,8,11,8,11},{7,7,7,7,7,7,7,7}};
                 break;
             case 7:
-                return new int [,] {{0,0,0,0,0,0,0,0},{8,8,8,8,8,8,8,8},{9,9,9,9,9,9,9,9},{8,7,8,7,8,7,8,7},{8,8,8,8,8,8,8,8},{7,7,7,7,7,7,7,7}};
+                return new int [,] {{0,0,0,0,0,0,0,0},{0,0,9,9,9,9,0,0},{11,11,11,11,11,11,11,11},{8,7,8,7,8,7,8,7},{8,8,8,8,8,8,8,8},{7,7,7,7,7,7,7,7}};
+                break;
+            case 8:
+                return new int [,] {{0,0,0,0,0,0,0,0},{9,9,9,9,9,9,9,9},{11,11,11,11,11,11,11,11},{8,7,8,7,8,7,8,7},{8,8,8,8,8,8,8,8},{7,7,7,7,7,7,7,7}};
+                break;
+            case 9:
+                return new int [,] {{0,0,9,9,9,9,0,0},{9,9,9,9,9,9,9,9},{11,11,11,11,11,11,11,11},{8,7,8,7,8,7,8,7},{8,8,8,8,8,8,8,8},{7,7,7,7,7,7,7,7}};
+                break;
+            case 10:
+                return new int [,] {{9,9,9,9,9,9,9,9},{9,9,9,9,9,9,9,9},{11,11,11,11,11,11,11,11},{8,7,8,7,8,7,8,7},{8,8,8,8,8,8,8,8},{7,7,7,7,7,7,7,7}};
+                break;
+            case 11:
+                return new int [,] {{9,9,9,9,9,9,9,9},{9,9,9,9,9,9,9,9},{11,11,11,11,11,11,11,11},{11,11,11,11,11,11,11,11},{8,8,8,8,8,8,8,8},{7,7,7,7,7,7,7,7}};
+                break;
+            case 12:
+                return new int [,] {{9,9,9,9,9,9,9,9},{9,9,9,9,9,9,9,9},{11,11,11,11,11,11,11,11},{11,11,11,11,11,11,11,11},{9,9,9,9,9,9,9,9},{7,7,7,7,7,7,7,7}};
+                break;
+            case 13:
+                return new int [,] {{9,9,9,9,9,9,9,9},{9,9,9,9,9,9,9,9},{11,11,11,11,11,11,11,11},{11,11,11,11,11,11,11,11},{9,9,9,9,9,9,9,9},{9,9,9,9,9,9,9,9}};
                 break;
         }
         
-        return new int[,]{{9,9,9,9,9,9,9,9},{8,8,8,8,8,8,8,8},{9,9,9,9,9,9,9,9},{8,7,8,7,8,7,8,7},{8,8,8,8,8,8,8,8},{7,7,7,7,7,7,7,7}};
+        return new int[,]{{9,9,9,9,9,9,9,9},{9,9,9,9,9,9,9,9},{11,11,11,11,11,11,11,11},{11,11,11,11,11,11,11,11},{9,9,9,9,9,9,9,9},{9,9,9,9,9,9,9,9}};
     }
     int[,] levelHolder(int level)
     {

@@ -16,8 +16,6 @@ public class ShieldShipScript : MonoBehaviour
     public float yspeed = 2f;
     public float amplitude = 0.5f;
 
-    public Animator animator;
-    
     public GameObject manager;
     public EnemyManagerScript ManagerScript;
     
@@ -35,15 +33,18 @@ public class ShieldShipScript : MonoBehaviour
     public AudioSource shootSound;
 
     public bool spedUp;
+    
+    public SpriteRenderer spriteRenderer;
+    public Sprite[] spriteArray;
     // Start is called before the first frame update
     void Start()
     {
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         spedUp = false;
         manager = GameObject.Find("EnemyManager");
         ManagerScript = manager.GetComponent<EnemyManagerScript>();
         playerObject = GameObject.Find("Player");
         playerScript = playerObject.GetComponent<PlayerScript>();
-        animator = this.GetComponent<Animator>();
         float delay = Random.Range(2f, 10f);
         float rate = Random.Range(2f, 8f);
         InvokeRepeating("Fire", delay, rate);
@@ -150,6 +151,7 @@ public class ShieldShipScript : MonoBehaviour
             Destroy(other.gameObject);
             ManagerScript.tally++;
             playerScript.loadShip(1);
+            spriteRenderer.sprite = spriteArray[4];
         }
         if (other.gameObject.tag == "midAbductor")
         {
@@ -163,6 +165,7 @@ public class ShieldShipScript : MonoBehaviour
             Destroy(other.gameObject);
             ManagerScript.tally++;
             playerScript.loadShip(2);
+            spriteRenderer.sprite = spriteArray[4];
         }
         if (other.gameObject.tag == "rightAbductor")
         {
@@ -176,6 +179,7 @@ public class ShieldShipScript : MonoBehaviour
             Destroy(other.gameObject);
             ManagerScript.tally++;
             playerScript.loadShip(3);
+            spriteRenderer.sprite = spriteArray[4];
         }
 
         if (other.gameObject.tag == "Ally")
@@ -202,7 +206,7 @@ public class ShieldShipScript : MonoBehaviour
     private void Fire()
     {
         int i = Random.Range(0, 100);
-        if (i > 70 && playerControlled == false)
+        if (i > 60 && playerControlled == false)
         {
             StartCoroutine("EnemyShoot");
         }
@@ -215,9 +219,17 @@ public class ShieldShipScript : MonoBehaviour
 
     IEnumerator EnemyShoot()
     {
+        spriteRenderer.sprite = spriteArray[1];
+        yield return new WaitForSeconds(.2f);
+        spriteRenderer.sprite = spriteArray[2];
+        yield return new WaitForSeconds(.2f);
+        spriteRenderer.sprite = spriteArray[3];
+        yield return new WaitForSeconds(.2f);
+        spriteRenderer.sprite = spriteArray[4];
         yield return new WaitForSeconds(.2f);
         shootSound.Play();
         Instantiate(enemyShield, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
+        spriteRenderer.sprite = spriteArray[0];
     }
 
     IEnumerator Shoot()
@@ -225,10 +237,17 @@ public class ShieldShipScript : MonoBehaviour
         if (shooting == false)
         {
             shooting = true;
-            yield return new WaitForSeconds(.2f);
             shootSound.Play();
+            spriteRenderer.sprite = spriteArray[0];
             Instantiate(Shield, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
-            yield return new WaitForSeconds(8.0f);
+            yield return new WaitForSeconds(2.0f);
+            spriteRenderer.sprite = spriteArray[1];
+            yield return new WaitForSeconds(2.0f);
+            spriteRenderer.sprite = spriteArray[2];
+            yield return new WaitForSeconds(2.0f);
+            spriteRenderer.sprite = spriteArray[3];
+            yield return new WaitForSeconds(2.0f);
+            spriteRenderer.sprite = spriteArray[4];
             shooting = false;
         }
     }

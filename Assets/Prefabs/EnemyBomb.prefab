@@ -156,7 +156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e2897817b38b5741898aeebde58e19e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  speed: 2.5
   direction: -1
   animator: {fileID: 7029134159167604628}
   collider: {fileID: -2370941060291785200}

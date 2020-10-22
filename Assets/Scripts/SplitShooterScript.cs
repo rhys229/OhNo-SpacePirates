@@ -215,7 +215,7 @@ public class SplitShooterScript : MonoBehaviour
             Instantiate(leftProjectile, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
             Instantiate(rightProjectile, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
             Instantiate(midProjectile, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(3f);
             shooting = false;
         }
     }

@@ -201,7 +201,7 @@ public class BomberScript : MonoBehaviour
     private void Fire()
     {
         int i = Random.Range(0, 100);
-        if (i > 80 && playerControlled == false)
+        if (i > 60 && playerControlled == false)
         {
             StartCoroutine("EnemyShoot");
         }

@@ -84,11 +84,11 @@ public class ShieldScript : MonoBehaviour
         spriteRenderer.sprite = spriteArray[3];
         
         yield return new WaitForSeconds(.1f);
-        collider.radius = .3f;
+        collider.radius = .4f;
         spriteRenderer.sprite = spriteArray[4];
         
         yield return new WaitForSeconds(.2f);
-        collider.radius = .4f;
+        collider.radius = .6f;
         spriteRenderer.sprite = spriteArray[5];
         
         yield return new WaitForSeconds(.8f);
