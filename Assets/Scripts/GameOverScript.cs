@@ -11,10 +11,16 @@ public class GameOverScript : MonoBehaviour
     public Text NewHighScore;
     public GameObject ScoreManager;
     public ScoreManagerScript ScoreManagerScript;
+    public InputField nameInput;
+
+    public bool scoreAdded;
+
+    public int finalScore;
     // Start is called before the first frame update
     void Start()
     {
-        NewHighScore.gameObject.SetActive(false);
+        scoreAdded = false;
+        nameInput.onEndEdit.AddListener(delegate {addScore(nameInput); });
         StartCoroutine("gameover");
     }
 
@@ -27,20 +33,22 @@ public class GameOverScript : MonoBehaviour
         }
     }
 
+    void addScore(InputField input)
+    {
+        if (scoreAdded == false)
+        {
+            string name = input.text.Substring(0, 7);
+            Highscores.AddNewHighscore(name, finalScore);
+            scoreAdded = true;
+        }
+    }
+
     IEnumerator gameover()
     {
         yield return new WaitForSeconds(.1f);
         ScoreManager = GameObject.Find("ScoreManager");
         ScoreManagerScript = ScoreManager.GetComponent<ScoreManagerScript>();
-        int finalscore = ScoreManagerScript.score;
-        int highscore = PlayerPrefs.GetInt("highscore", 0);
-        if (finalscore > highscore)
-        {
-            PlayerPrefs.SetInt("highscore",finalscore);
-            NewHighScore.gameObject.SetActive(true);
-        }
-        highscore = PlayerPrefs.GetInt("highscore", 0);
-        FinalScore.text = finalscore.ToString();
-        HighScore.text = highscore.ToString();
+        finalScore = ScoreManagerScript.score;
+        FinalScore.text = finalScore.ToString();
     }
 }
