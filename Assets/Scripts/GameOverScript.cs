@@ -37,7 +37,15 @@ public class GameOverScript : MonoBehaviour
     {
         if (scoreAdded == false)
         {
-            string name = input.text.Substring(0, 7);
+            string name;
+            if (input.text.Length > 7)
+            {
+                name = input.text.Substring(0, 7);
+            }
+            else
+            {
+                name = input.text;
+            }
             Highscores.AddNewHighscore(name, finalScore);
             scoreAdded = true;
         }
