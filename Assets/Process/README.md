@@ -63,3 +63,21 @@ Introduced burst shot faster
 Made level 1 go faster
 Increased ship speed if there is only 1 or 2 left
 
+## V0.4
+Created my own background
+Added more music
+Added an additional pirate ship
+Buffed enemy shield ships
+Visually overhauled shield ships
+Buffed enemy bombers
+Nerfed Pirate spear
+Nerfed Split shot ship
+
+## V0.45
+Fixed audio on boomerangs
+Nerfed ray beam
+Decreased enemy black hole time
+Boomerangs no longer stopped by shields
+Fixed music manager
+Decreased enemy shield ship fire rate
+

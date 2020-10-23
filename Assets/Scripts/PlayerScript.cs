@@ -308,6 +308,7 @@ public class PlayerScript : MonoBehaviour
 
     IEnumerator gameover()
     {
+        lockMovement = true;
         Instantiate(explosion, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
         yield return new WaitForSeconds(2f);
         GameObject[] enemyObjects;

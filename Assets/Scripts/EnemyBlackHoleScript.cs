@@ -93,7 +93,8 @@ public class EnemyBlackHoleScript : MonoBehaviour
         Debug.Log("Exploding");
         exploding = true;
         rb.velocity = Vector2.zero;
-        yield return new WaitForSeconds(6f);
+        int i = Random.Range(3, 6);
+        yield return new WaitForSeconds(i);
         Destroy(this.gameObject);
         exploding = false;
     }

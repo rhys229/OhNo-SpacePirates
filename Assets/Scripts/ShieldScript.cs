@@ -37,7 +37,10 @@ public class ShieldScript : MonoBehaviour
     {
         if (other.gameObject.tag == "Enemy Projectile")
         {
-            Destroy(other.gameObject);
+            if (other.gameObject.name != "EnemyBoomerang(Clone)")
+            {
+                Destroy(other.gameObject);
+            }
         }
 
         if (other.gameObject.tag == "wall")

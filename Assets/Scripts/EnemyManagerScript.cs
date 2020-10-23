@@ -45,6 +45,8 @@ public class EnemyManagerScript : MonoBehaviour
     public ScoreManagerScript scoreManagerScript;
 
     public bool levelInProgress;
+
+    public  int music;
     // Start is called before the first frame update
     void Start()
     {
@@ -64,6 +66,7 @@ public class EnemyManagerScript : MonoBehaviour
     void Update()
     {
         LevelStarter();
+        MusicStarter();
         Score.text = score.ToString();
 
     }
@@ -85,46 +88,30 @@ public class EnemyManagerScript : MonoBehaviour
             int i = Random.Range(0, 100);
             if (i < 25 && level > 3)
             {
-                if (PirateMusic.isPlaying == false && pirateLevel < 5)
+                if (pirateLevel < 5)
                 {
-                    PirateMusic.Play();
-                    MainMusic3.Pause();
-                    MainMusic2.Pause();
-                    MainMusic.Pause();
+                    music = 4;
                 }
-                if (PirateMusic2.isPlaying == false && pirateLevel > 4)
+                if (pirateLevel > 4)
                 {
-                    PirateMusic2.Play();
-                    PirateMusic.Pause();
-                    MainMusic3.Pause();
-                    MainMusic2.Pause();
-                    MainMusic.Pause();
+                    music = 5;
                 }
                 pirateLevel++;
                 StartCoroutine("pirateTransfer", pirateLevel);
             }
             else
             {
-                if (MainMusic.isPlaying == false && level < 10)
+                if (level < 10)
                 {
-                    MainMusic.Play();
-                    PirateMusic.Pause();
-                    PirateMusic2.Pause();
+                    music = 1;
                 }
-                if (MainMusic2.isPlaying == false && level > 9)
+                if (level > 9)
                 {
-                    MainMusic2.Play();
-                    MainMusic.Pause();
-                    PirateMusic.Pause();
-                    PirateMusic2.Pause();
+                    music = 2;
                 }
-                if (MainMusic3.isPlaying == false && level > 27)
+                if (level > 27)
                 {
-                    MainMusic3.Play();
-                    MainMusic2.Pause();
-                    MainMusic.Pause();
-                    PirateMusic.Pause();
-                    PirateMusic2.Pause();
+                    music = 3;
                 }
                 level++;
                 StartCoroutine("levelTransfer", level);
@@ -382,6 +369,50 @@ public class EnemyManagerScript : MonoBehaviour
     {
         Debug.Log("killing score script");
         scoreManagerScript.kill();
+    }
+
+    void MusicStarter()
+    {
+        if (MainMusic.isPlaying == false && music == 1)
+        {
+            PirateMusic2.Pause();
+            PirateMusic.Pause();
+            MainMusic3.Pause();
+            MainMusic2.Pause();
+            MainMusic.Play();
+        }
+        if (MainMusic2.isPlaying == false && music == 2)
+        {
+            PirateMusic2.Pause();
+            PirateMusic.Pause();
+            MainMusic3.Pause();
+            MainMusic2.Play();
+            MainMusic.Pause();
+        }
+        if (MainMusic3.isPlaying == false && music == 3)
+        {
+            PirateMusic2.Pause();
+            PirateMusic.Pause();
+            MainMusic3.Play();
+            MainMusic2.Pause();
+            MainMusic.Pause();
+        }
+        if (PirateMusic.isPlaying == false && music == 4)
+        {
+            PirateMusic2.Pause();
+            PirateMusic.Play();
+            MainMusic3.Pause();
+            MainMusic2.Pause();
+            MainMusic.Pause();
+        }
+        if (PirateMusic2.isPlaying == false && music == 5)
+        {
+            PirateMusic2.Play();
+            PirateMusic.Pause();
+            MainMusic3.Pause();
+            MainMusic2.Pause();
+            MainMusic.Pause();
+        }
     }
 }
     

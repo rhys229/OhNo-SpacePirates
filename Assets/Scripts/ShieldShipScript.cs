@@ -206,7 +206,7 @@ public class ShieldShipScript : MonoBehaviour
     private void Fire()
     {
         int i = Random.Range(0, 100);
-        if (i > 60 && playerControlled == false)
+        if (i > 63 && playerControlled == false)
         {
             StartCoroutine("EnemyShoot");
         }

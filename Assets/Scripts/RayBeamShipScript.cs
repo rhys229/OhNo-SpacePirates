@@ -221,7 +221,7 @@ public class RayBeamShipScript : MonoBehaviour
             yield return new WaitForSeconds(.2f);
             shootSound.Play();
             Instantiate(Projectile, new Vector2(transform.position.x, transform.position.y+8.6f), Quaternion.identity);
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(5f);
             shooting = false;
         }
     }

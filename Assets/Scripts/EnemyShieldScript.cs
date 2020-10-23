@@ -32,7 +32,10 @@ public class EnemyShieldScript : MonoBehaviour
     {
         if (other.gameObject.tag == "Projectile")
         {
-            Destroy(other.gameObject);
+            if (other.gameObject.name != "Boomerang(Clone)")
+            {
+                Destroy(other.gameObject);
+            }
         }
 
         if (other.gameObject.tag == "Player")
